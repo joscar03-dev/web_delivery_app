@@ -1,0 +1,51 @@
+<nav class="bg-black shadow-md">
+  <div class="container mx-auto px-4">
+    <div class="flex items-center justify-between h-20">
+      <a href="#" class="flex items-center space-x-3">
+        <img
+          class="h-20 w-auto"
+          src='assets/img/logo.png'
+          alt="RestauranteLogo"
+        />
+      </a>
+      <div class="hidden md:flex items-end space-x-4">
+        <a
+          routerLink="/menu/slide"
+          class="flex items-center text-yellow-400 text-lg hover:text-white"
+        >
+          Inicio
+        </a>
+        <a
+          routerLink="/menu/lista-menu"
+          class="flex items-center text-yellow-400 text-lg hover:text-white"
+        >
+          Carta
+        </a>
+        <a
+          routerLink="/contacto"
+          class="flex items-center text-yellow-400 text-lg hover:text-white"
+        >
+          Contacto
+        </a>
+      </div>
+      
+      <!-- Botón desplegable -->
+      <div class="md:hidden">
+        <button (click)="toggleMenu()" class="text-gray-300 hover:text-white focus:outline-none">
+          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <!-- Menú desplegable -->
+    <div *ngIf="menuAbierto" class="md:hidden">
+      <a href="#" class="block text-yellow-400 text-lg hover:text-white py-2">Inicio</a>
+      <a href="#" class="block text-yellow-400 text-lg hover:text-white py-2">Carta</a>
+      <a href="#" class="block text-yellow-400 text-lg hover:text-white py-2">Contacto</a> 
+    </div>
+  </div>
+</nav>
+
+<script>
+</script>

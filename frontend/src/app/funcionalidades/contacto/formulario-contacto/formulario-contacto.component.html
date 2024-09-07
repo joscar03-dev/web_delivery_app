@@ -1,0 +1,39 @@
+<!-- <form #miFormulario="ngForm" (ngSubmit)="enviarMensaje(miFormulario)">
+  <div class="form-control">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" ngModel required>
+  </div>
+  <div class="form-control">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" ngModel required email>
+  </div>
+  <div class="form-control">
+    <label for="phone">Phone:</label>
+    <input type="tel" id="phone" name="phone" ngModel required>
+  </div>
+  <div class="form-control">
+    <button type="submit" [disabled]="!miFormulario.valid">Submit</button>
+  </div>
+</form>
+ -->
+<!-- 
+ <form [formGroup]="my_form" (ngSubmit)="enviarMensaje()">
+  <div class="form-control">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" formControlName="name">
+    <div *ngIf="my_form.get(name)">
+
+    </div>
+  </div>
+  <div class="form-control">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email">
+  </div>
+  <div class="form-control">
+    <label for="phone">Phone:</label>
+    <input type="tel" id="phone" name="phone">
+  </div>
+  <div class="form-control form-action-buttons">
+    <button type="submit" [disabled]="my_form.valid">Submit</button>
+  </div>
+</form> -->
