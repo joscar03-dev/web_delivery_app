@@ -36,6 +36,10 @@ class PlatoResource extends Resource
                 Select::make('categoria_id')
                     ->relationship('categoria', 'nombre')
                     ->required(),
+                Select::make('negocio_id')
+                    ->label('Negocio')
+                    ->relationship('negocio', 'nombre') // Asocia el plato con un negocio
+                    ->required()
             ]);
     }
 

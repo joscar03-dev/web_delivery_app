@@ -14,6 +14,7 @@ class Plato extends Model
         'precio',
         'imagen',
         'categoria_id',
+        'negocio_id'
     ];
     public function categoria()
     {
@@ -22,5 +23,8 @@ class Plato extends Model
     public function opciones()
     {
         return $this->hasMany(OpcionPlato::class);
+    }
+    public function negocio(){
+        return $this->belongsTo(Negocio::class);
     }
 }
