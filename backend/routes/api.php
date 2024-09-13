@@ -27,8 +27,17 @@ Route::get('/platos', [PlatoController::class, 'index']);
 
 // NUEVOS
 Route::middleware('auth:sanctum')->group(function () {
-    // API de negocios
-    Route::get('negocios', [NegocioController::class, 'index']);
+    
+    
+    
+});
+
+Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
+
+
+//lo que removi de auth:sanctum
+// API de negocios
+Route::get('negocios', [NegocioController::class, 'index']);
     Route::get('negocios/{id}', [NegocioController::class, 'show']);
 
     // API del carrito
@@ -43,7 +52,3 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('register', [AuthController::class, 'register']);
     Route::post('login', [AuthController::class, 'login']);
-    
-});
-
-Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
