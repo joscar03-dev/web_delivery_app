@@ -14,7 +14,9 @@ class Negocio extends Model
         'descripcion',
         'email',
         'tipo_negocio_id',
-        'horario_atencion'
+        'horario_atencion',
+        'imagen',
+        
     ];
     public function platos()
     {

@@ -1,0 +1,10 @@
+<swiper-container [pagination]="true" [slidesPerView]="1" [loop]="true">
+  <swiper-slide *ngFor="let item of featuredItems">
+    <ion-card>
+      <img [src]="item.imagen" alt="{{ item.nombre }}" /> <!-- Muestra la imagen del negocio -->
+      <ion-card-header>
+        <ion-card-title>{{ item.nombre }}</ion-card-title> <!-- Muestra el nombre del negocio -->
+      </ion-card-header>
+    </ion-card>
+  </swiper-slide>
+</swiper-container>

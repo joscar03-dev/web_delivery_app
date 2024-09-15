@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\NegocioResource\Pages;
 use App\Filament\Resources\NegocioResource\RelationManagers;
 use App\Models\Negocio;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -34,6 +35,7 @@ class NegocioResource extends Resource
                 TextColumn::make('direccion')->label('Dirección'),
                 TextColumn::make('created_at')->label('Creado el')->dateTime(),
                 TextColumn::make('updated_at')->label('Actualizado el')->dateTime(),
+                
             ])
             ->filters([
                 // Agregar filtros si es necesario
@@ -69,8 +71,9 @@ class NegocioResource extends Resource
                 Select::make('tipo_negocio_id')
                     ->relationship('tipoNegocio', 'nombre'),
                 TextInput::make('horario_atencion')
-                    ->label('Horario de Atención')
+                    ->label('Horario de Atención'),
                     // ->required(),
+                FileUpload::make('imagen')->image(),
             ]);
     }
 

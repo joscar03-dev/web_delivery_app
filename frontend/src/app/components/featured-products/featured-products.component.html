@@ -1,0 +1,12 @@
+<ion-list>
+  <ion-item *ngFor="let product of featuredProducts" [routerLink]="['/product', product.id]">
+    <ion-thumbnail slot="start">
+      <img [src]="product.image" />
+    </ion-thumbnail>
+    <ion-label>
+      <h2>{{ product.name }}</h2>
+      <p>{{ product.description }}</p>
+    </ion-label>
+    <ion-badge slot="end">{{ product.price }}</ion-badge>
+  </ion-item>
+</ion-list>
