@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class NegocioController extends Controller
 {
-    // Obtener la lista de negocios (opcionalmente filtrada por tipo de negocio)
+    /* // Obtener la lista de negocios (opcionalmente filtrada por tipo de negocio)
     public function index(Request $request)
     {
         $tipoNegocioId = $request->query('tipo_negocio_id');
@@ -27,5 +27,11 @@ class NegocioController extends Controller
     {
         $negocio = Negocio::with('platos.categoria')->findOrFail($id);
         return response()->json($negocio);
+    } */
+    public function index()
+    {
+        // Obtener todos los negocios y devolverlos como JSON
+        $negocios = Negocio::all();
+        return response()->json($negocios);
     }
 }

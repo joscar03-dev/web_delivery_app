@@ -19,18 +19,18 @@ register();
 })
 export class FeaturedCarouselComponent implements OnInit {
   featuredItems: any[] = [];
-  
+
   constructor(private negocioService: NegocioService) {}
 
   ngOnInit() {
     this.loadNegocios();
   }
 
-  // Cargar los negocios desde la API
+  // Método para cargar los negocios
   loadNegocios() {
     this.negocioService.getNegocios().subscribe(
       (data) => {
-        this.featuredItems = data.data; // Accede al array 'data' de la respuesta estandarizada
+        this.featuredItems = data;  // Asigna los datos de negocios a la variable featuredItems
       },
       (error) => {
         console.error('Error al cargar los negocios:', error);

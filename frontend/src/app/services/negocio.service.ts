@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class NegocioService {
-  private apiUrl = 'http://localhost:8000/api/negocios';  // URL de la API Laravel
+  /* private apiUrl = 'http://localhost:8000/api/negocios';  // URL de la API Laravel
 
   constructor(private http: HttpClient) {}
 
@@ -26,5 +26,14 @@ export class NegocioService {
   getNegocioById(id: number): Observable<any> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.get<any>(url);
+  } */
+
+  private apiUrl = 'http://localhost:8000/api/negocios';  // Asegúrate de que la URL sea correcta
+
+  constructor(private http: HttpClient) {}
+
+  // Obtener todos los negocios
+  getNegocios(): Observable<any> {
+    return this.http.get<any>(this.apiUrl);
   }
 }
