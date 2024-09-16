@@ -1,4 +1,4 @@
-<swiper-container [pagination]="true" [slidesPerView]="1" [loop]="true">
+<swiper-container [pagination]="true" [slidesPerView]="1" [loop]="false">
   <swiper-slide *ngFor="let item of featuredItems">
     <ion-card>
       <ion-img [src]="item.imagen ? item.imagen : 'assets/img/defecto.jpg'"></ion-img><!-- Muestra la imagen del negocio -->

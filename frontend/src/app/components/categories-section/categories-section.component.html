@@ -1,12 +1,42 @@
 <ion-grid>
   <ion-row>
-    <ion-col size="3" *ngFor="let category of categories">
+    <!-- <ion-col size="3" *ngFor="let category of tiposNegocios">
       <ion-button expand="block" [routerLink]="['/categories', category.id]" class="category-button">
         <div class="category-content">
-          <ion-icon [name]="category.icon"></ion-icon>
+          <ion-icon [name]="category.icon"> </ion-icon>
           <div>{{ category.name }}</div>
         </div>
+      </ion-button>
+    </ion-col> -->
+    <ion-col *ngFor="let tipo of tiposNegocios" size="3">
+      <ion-button expand="block" [routerLink]="['#']" class="category-button" (click)="onCategoriaClick(tipo.id)">
+        <div class="category-content">
+          <ion-icon [name]="" slot="start"></ion-icon>
+          <!-- getIcon(tipo.nombre) -->
+          <div>{{ tipo.nombre }}</div>
+        </div>
+        
       </ion-button>
     </ion-col>
   </ion-row>
 </ion-grid>
+
+<div class="negocios" *ngIf="negocios.length > 0">
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let negocio of negocios" size="12" size-md="4">
+        <ion-card>
+          <ion-img [src]="negocio.imagen ? negocio.imagen : 'assets/img/default-image.jpg'"></ion-img>
+          <ion-card-header>
+            <ion-card-title>{{ negocio.nombre }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{ negocio.telefono }}</p>
+            <p>{{ negocio.email }}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
+

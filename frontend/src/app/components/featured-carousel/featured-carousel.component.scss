@@ -1,17 +1,16 @@
-ion-card {
-    max-width: 300px; /* Limita el ancho de la tarjeta */
-    margin: auto; /* Centra la tarjeta horizontalmente */
-  }
-  
+/* ion-card {
+  max-width: 300px; 
+  margin: auto; 
+} */
+
+ion-img {
+  height: 200px; /* Ajusta la altura de la imagen */
+  object-fit: cover; /* Mantiene la proporción de la imagen */
+}
+
+/* Si deseas que las imágenes sean responsivas */
+@media (max-width: 600px) {
   ion-img {
-    height: 200px; /* Ajusta la altura de la imagen */
-    object-fit: cover; /* Mantiene la proporción de la imagen */
+    height: 30vw; /* Ajusta la altura de la imagen según el ancho de la pantalla */
   }
-  
-  /* Si deseas que las imágenes sean responsivas */
-  @media (max-width: 600px) {
-    ion-img {
-      height: 30vw; /* Ajusta la altura de la imagen según el ancho de la pantalla */
-    }
-  }
-  
+}

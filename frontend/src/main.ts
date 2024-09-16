@@ -2,10 +2,10 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { RouteReuseStrategy, provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { cartOutline, constructOutline, homeOutline, locationOutline, personOutline, restaurantOutline, searchOutline, storefrontOutline, wineOutline } from 'ionicons/icons';
+import { cartOutline, constructOutline, helpCircle, homeOutline, locationOutline, personOutline, restaurantOutline, searchOutline, storefrontOutline, wineOutline, restaurant, wine, cart, construct, } from 'ionicons/icons';
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
-import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 
 addIcons(
   {
@@ -18,7 +18,11 @@ addIcons(
     'restaurant-outline': restaurantOutline,
     'search-outline': searchOutline,
     'location-outline': locationOutline,
-
+    'restaurant': restaurant,
+    'wine': wine,
+    'cart': cart,
+    'construct': construct,
+    'help-circle': helpCircle
   }
 );
 bootstrapApplication(AppComponent, {

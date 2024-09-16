@@ -5,6 +5,7 @@ use App\Http\Controllers\API\CarritoController;
 use App\Http\Controllers\API\NegocioController;
 use App\Http\Controllers\API\PedidoController;
 use App\Http\Controllers\PlatoController;
+use App\Http\Controllers\API\TipoNegocioController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -52,3 +53,5 @@ Route::get('negocios', [NegocioController::class, 'index']);
 
     Route::post('register', [AuthController::class, 'register']);
     Route::post('login', [AuthController::class, 'login']);
+//API TIPO DE NEGOCIOS
+Route::get('/tipos-negocios', [TipoNegocioController::class, 'index']);

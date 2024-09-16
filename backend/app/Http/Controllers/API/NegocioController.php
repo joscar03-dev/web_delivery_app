@@ -9,15 +9,21 @@ use Illuminate\Http\Request;
 class NegocioController extends Controller
 {
     // VERSION 1 API
-    /* // Obtener la lista de negocios (opcionalmente filtrada por tipo de negocio)
+    // Obtener la lista de negocios (opcionalmente filtrada por tipo de negocio)
     public function index(Request $request)
     {
         $tipoNegocioId = $request->query('tipo_negocio_id');
 
         if ($tipoNegocioId) {
-            $negocios = Negocio::where('tipo_negocio_id', $tipoNegocioId)->with('platos.categoria')->get();
+            $negocios = Negocio::where('tipo_negocio_id', $tipoNegocioId)->with('platos.categoria')->get()->map(function ($negocio) {
+                $negocio->imagen = $negocio->imagen ? url('storage/' . $negocio->imagen) : null;
+                return $negocio;
+            });
         } else {
-            $negocios = Negocio::with('platos.categoria')->get();
+            $negocios = Negocio::with('platos.categoria')->get()->map(function ($negocio) {
+                $negocio->imagen = $negocio->imagen ? url('storage/' . $negocio->imagen) : null;
+                return $negocio;
+            });
         }
 
         return response()->json($negocios);
@@ -28,7 +34,7 @@ class NegocioController extends Controller
     {
         $negocio = Negocio::with('platos.categoria')->findOrFail($id);
         return response()->json($negocio);
-    } */
+    }
 
     // VERSION 2 API
     /* public function index()
@@ -37,7 +43,8 @@ class NegocioController extends Controller
         $negocios = Negocio::all();
         return response()->json($negocios);
     } */
-    public function index()
+   //Version 3
+    /* public function index()
     {
         $negocios = Negocio::all()->map(function ($negocio) {
             $negocio->imagen = $negocio->imagen ? url('storage/' . $negocio->imagen) : null;
@@ -45,5 +52,5 @@ class NegocioController extends Controller
         });
         
         return response()->json($negocios);
-    }
+    } */
 }
