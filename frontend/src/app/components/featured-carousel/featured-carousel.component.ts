@@ -3,7 +3,7 @@ import { register } from 'swiper/element/bundle';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { NegocioService } from 'src/app/services/negocio.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 
