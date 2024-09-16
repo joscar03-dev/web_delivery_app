@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class NegocioController extends Controller
 {
+    // VERSION 1 API
     /* // Obtener la lista de negocios (opcionalmente filtrada por tipo de negocio)
     public function index(Request $request)
     {
@@ -28,10 +29,21 @@ class NegocioController extends Controller
         $negocio = Negocio::with('platos.categoria')->findOrFail($id);
         return response()->json($negocio);
     } */
-    public function index()
+
+    // VERSION 2 API
+    /* public function index()
     {
         // Obtener todos los negocios y devolverlos como JSON
         $negocios = Negocio::all();
+        return response()->json($negocios);
+    } */
+    public function index()
+    {
+        $negocios = Negocio::all()->map(function ($negocio) {
+            $negocio->imagen = $negocio->imagen ? url('storage/' . $negocio->imagen) : null;
+            return $negocio;
+        });
+        
         return response()->json($negocios);
     }
 }
