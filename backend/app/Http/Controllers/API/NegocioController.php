@@ -35,6 +35,7 @@ class NegocioController extends Controller
     public function show($id)
     {
         $negocio = Negocio::with('platos.categoria')->findOrFail($id);
+        $negocio = Negocio::find(1);
         return response()->json($negocio);
     }
 

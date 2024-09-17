@@ -6,6 +6,18 @@ import { IonicModule } from '@ionic/angular';
 import { NegocioService } from 'src/app/services/negocio.service';
 import { TiposNegociosService } from 'src/app/services/tipos-negocios.service';
 
+export interface Negocio {
+  id: number;
+  nombre: string;
+  imagen: string | null;
+  telefono: string;
+  email: string;
+  hora_apertura: string;
+  hora_cierre: string;
+  estado: string; // 'Abierto' o 'Cerrado'
+  // Otras propiedades que devuelva tu API
+}
+
 @Component({
   selector: 'app-categories-section',
   templateUrl: './categories-section.component.html',
@@ -63,6 +75,7 @@ import { TiposNegociosService } from 'src/app/services/tipos-negocios.service';
   
     ngOnInit() {
       this.loadTiposNegocios(); // Carga las categorías al inicio
+      this.loadNegociosAbiertos();
     }
   
     loadTiposNegocios() {
@@ -98,6 +111,18 @@ import { TiposNegociosService } from 'src/app/services/tipos-negocios.service';
         },
         (error) => {
           console.error('Error al cargar los negocios:', error);
+        }
+      );
+    }
+
+    loadNegociosAbiertos() {
+      this.negociosService.getNegocios().subscribe(
+        (data) => {
+          // Filtrar solo los negocios abiertos
+          this.negocios = data.filter(negocios => negocios.estado === 'Abierto');
+        },
+        (error) => {
+          console.error('Error al cargar los negocios abiertos:', error);
         }
       );
     }
