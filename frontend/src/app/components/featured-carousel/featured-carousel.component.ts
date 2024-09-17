@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { NegocioService } from 'src/app/services/negocio.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -15,7 +16,7 @@ register();
   styleUrls: ['./featured-carousel.component.scss'],
   standalone: true,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [IonicModule, CommonModule, HttpClientModule], // Solo si estás usando standalone components
+  imports: [IonicModule, CommonModule, RouterModule], // Solo si estás usando standalone components
 })
 export class FeaturedCarouselComponent implements OnInit {
   featuredItems: any[] = [];

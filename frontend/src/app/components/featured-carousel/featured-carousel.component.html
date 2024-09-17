@@ -1,7 +1,7 @@
 <ion-spinner *ngIf="featuredItems.length === 0"></ion-spinner>
-<swiper-container [pagination]="true" [slidesPerView]="1" [loop]="false">
-  <swiper-slide *ngFor="let item of featuredItems">
-    <ion-card>
+<swiper-container [pagination]="true" [slidesPerView]="1" [loop]="true">
+  <swiper-slide *ngFor="let item of featuredItems" >
+    <ion-card [routerLink]="['/negocio', item.id]">
       <ion-img
         [src]="item.imagen ? item.imagen : 'assets/img/defecto.jpg'"
       ></ion-img>

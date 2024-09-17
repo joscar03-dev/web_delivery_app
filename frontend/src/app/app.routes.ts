@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { Component } from '@angular/core';
+import { NegocioDetalleComponent } from './components/negocio-detalle/negocio-detalle.component';
 
 export const routes: Routes = [
   {
@@ -10,4 +12,5 @@ export const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full',
   },
+  { path: 'negocio/:id', component: NegocioDetalleComponent }
 ];

@@ -16,6 +16,14 @@ export interface Negocio {
   hora_cierre: string;
   estado: string; // 'Abierto' o 'Cerrado'
   // Otras propiedades que devuelva tu API
+  platos?: Plato[];
+}
+export interface Plato {
+  id: number;
+  nombre: string;
+  descripcion: string;
+  precio: string;
+  imagen: string;
 }
 
 @Component({
@@ -27,7 +35,8 @@ export interface Negocio {
   imports: [
     IonicModule,
     RouterModule,
-    CommonModule
+    CommonModule, 
+    RouterModule
   ]
 })
 /* export class CategoriesSectionComponent implements OnInit {
@@ -108,6 +117,7 @@ export interface Negocio {
       this.negociosService.getNegocios(tipoNegocioId).subscribe(
         (data) => {
           this.negocios = data; // Asignar los negocios filtrados a la variable negocios
+          console.log('Negocios filtrados:', data);
         },
         (error) => {
           console.error('Error al cargar los negocios:', error);
@@ -118,8 +128,10 @@ export interface Negocio {
     loadNegociosAbiertos() {
       this.negociosService.getNegocios().subscribe(
         (data) => {
+          
           // Filtrar solo los negocios abiertos
           this.negocios = data.filter(negocios => negocios.estado === 'Abierto');
+          
         },
         (error) => {
           console.error('Error al cargar los negocios abiertos:', error);

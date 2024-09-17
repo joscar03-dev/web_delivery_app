@@ -38,7 +38,7 @@
   <ion-grid>
     <ion-row>
       <ion-col *ngFor="let tipo of tiposNegocios" size="3">
-        <ion-button expand="block" [routerLink]="['#']" class="category-button" (click)="onCategoriaClick(tipo.id)">
+        <ion-button expand="block" class="category-button" (click)="onCategoriaClick(tipo.id)">
           <div class="category-content">
             <ion-icon [name]="getIcon(tipo.nombre)" slot="start"></ion-icon>
             <div>{{ tipo.nombre }}</div>
@@ -52,7 +52,7 @@
     <ion-grid>
       <ion-row>
         <ion-col *ngFor="let negocio of negocios" size="12" size-md="4">
-          <ion-card>
+          <ion-card [routerLink]="['/negocio', negocio.id]">
             <ion-img [src]="negocio.imagen ? negocio.imagen : 'assets/img/defecto.jpg'"></ion-img>
             <ion-card-header>
               <ion-card-title>{{ negocio.nombre }}</ion-card-title>

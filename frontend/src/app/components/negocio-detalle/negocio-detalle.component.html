@@ -1,0 +1,36 @@
+<ion-content>
+  <div *ngIf="negocio">
+    <ion-card>
+      <ion-img [src]="negocio.imagen ? negocio.imagen : 'assets/img/defecto.jpg'"></ion-img>
+      <ion-card-header>
+        <ion-card-title>{{ negocio.nombre }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ negocio.telefono }}</p>
+        <p>{{ negocio.email }}</p>
+
+        <!-- Mostrar el estado de abierto/cerrado -->
+        <div *ngIf="negocio.estado === 'Abierto'" class="badge badge-success">Abierto</div>
+        <div *ngIf="negocio.estado === 'Cerrado'" class="badge badge-danger">Cerrado</div>
+
+        <!-- Mostrar el horario de apertura y cierre -->
+        <p>Horario: {{ negocio.hora_apertura }} - {{ negocio.hora_cierre }}</p>
+
+        <!-- Mostrar los platos del negocio -->
+        <div *ngIf="negocio.platos && negocio.platos.length > 0">
+          <h5>Platos Disponibles:</h5>
+          <ul>
+            <li *ngFor="let plato of negocio.platos">
+              <strong>{{ plato.nombre }}</strong>: {{ plato.descripcion }} - S/{{ plato.precio }}
+            </li>
+          </ul>
+        </div>
+        <div *ngIf="!negocio.platos || negocio.platos.length === 0">
+          <p>No hay platos disponibles.</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <ion-spinner *ngIf="!negocio"></ion-spinner> <!-- Spinner mientras se carga el negocio -->
+</ion-content>
