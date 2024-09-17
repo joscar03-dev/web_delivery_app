@@ -10,6 +10,7 @@ use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -32,10 +33,16 @@ class NegocioResource extends Resource
                 TextColumn::make('nombre')->label('Nombre del Negocio')->sortable()->searchable(),
                 TextColumn::make('telefono')->label('Teléfono'),
                 TextColumn::make('email')->label('Email'),
-                TextColumn::make('direccion')->label('Dirección'),
-                TextColumn::make('created_at')->label('Creado el')->dateTime(),
-                TextColumn::make('updated_at')->label('Actualizado el')->dateTime(),
-                
+                TextColumn::make('estado')
+                    ->label('Estado')
+                    ->formatStateUsing(function ($record) {
+                        return $record->estado; // Usamos el accesor dinámico
+                    })
+                    ->badge()
+                    ->color(function ($record) {
+                        return $record->estado === 'Abierto' ? 'success' : 'danger'; // Color verde para abierto, rojo para cerrado
+                    }),
+
             ])
             ->filters([
                 // Agregar filtros si es necesario
@@ -57,7 +64,7 @@ class NegocioResource extends Resource
                     ->label('Nombre del Negocio')
                     ->required()
                     ->maxLength(255),
-                Textarea::make('direccion')
+                TextInput::make('direccion')
                     ->label('Dirección del Negocio')
                     ->required(),
                 TextInput::make('telefono')
@@ -72,8 +79,17 @@ class NegocioResource extends Resource
                     ->relationship('tipoNegocio', 'nombre'),
                 TextInput::make('horario_atencion')
                     ->label('Horario de Atención'),
-                    // ->required(),
+                // ->required(),
                 FileUpload::make('imagen')->image(),
+                TimePicker::make('hora_apertura')
+                    ->label('Hora de Apertura')
+                    ->required()
+                    ->placeholder('Seleccione la hora de apertura'),
+
+                TimePicker::make('hora_cierre')
+                    ->label('Hora de Cierre')
+                    ->required()
+                    ->placeholder('Seleccione la hora de cierre'),
             ]);
     }
 

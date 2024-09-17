@@ -70,7 +70,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'America/Lima', // Cambia a tu zona horaria
 
     /*
     |--------------------------------------------------------------------------

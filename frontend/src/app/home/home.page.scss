@@ -1,32 +1,66 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
-}
-
-ion-content {
+/* Estilo global para la página */
+body, html {
   height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* El contenedor principal del layout */
+main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+/* Estilos del header */
+app-header {
+  flex-shrink: 0; /* Evita que el header se encoja */
+  position: relative;
+  z-index: 1000; /* Asegura que esté siempre en la parte superior */
+}
+
+/* Estilos del contenido */
+main {
+  flex-grow: 1;
+  overflow-y: auto; /* Habilita el scroll en el contenido */
+}
+
+/* Estilos del footer */
+app-footer {
+  flex-shrink: 0; /* Evita que el footer se encoja */
+  position: relative;
+  z-index: 1000; /* Asegura que el footer esté visible en la parte inferior */
+}
+
+/* Estilos del contenido con scroll */
+.content {
+  flex-grow: 1;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column; /* Alineación en columna */
+  justify-content: flex-start; /* Asegura que los componentes se alineen al inicio */
+  gap: 10px; /* Espacio entre componentes */
+  padding-bottom: 10px; /* Añade un pequeño padding inferior */
+}
+
+
+/* Estilos de los componentes de contenido (carousel y categorías) */
+app-featured-carousel, app-categories-section {
+  flex-shrink: 0;
+  margin-bottom: 20px;
+}
+
+
+@media (max-width: 768px) {
+  .content {
+    gap: 5px; /* Reduce el espacio entre los componentes en pantallas pequeñas */
+    padding: 5px; /* Ajusta el padding para pantallas pequeñas */
+  }
+  
+  app-featured-carousel, app-categories-section {
+    margin: 0;
+    padding: 0;
+  }
 }

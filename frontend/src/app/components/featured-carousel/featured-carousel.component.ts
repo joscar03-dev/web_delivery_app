@@ -30,6 +30,7 @@ export class FeaturedCarouselComponent implements OnInit {
   loadNegocios() {
     this.negocioService.getNegocios().subscribe(
       (data) => {
+        console.log(data);
         this.featuredItems = data;  // Asigna los datos de negocios a la variable featuredItems
       },
       (error) => {

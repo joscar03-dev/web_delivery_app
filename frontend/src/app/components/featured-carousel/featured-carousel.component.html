@@ -1,10 +1,26 @@
+<ion-spinner *ngIf="featuredItems.length === 0"></ion-spinner>
 <swiper-container [pagination]="true" [slidesPerView]="1" [loop]="false">
   <swiper-slide *ngFor="let item of featuredItems">
     <ion-card>
-      <ion-img [src]="item.imagen ? item.imagen : 'assets/img/defecto.jpg'"></ion-img><!-- Muestra la imagen del negocio -->
+      <ion-img
+        [src]="item.imagen ? item.imagen : 'assets/img/defecto.jpg'"
+      ></ion-img>
       <ion-card-header>
-        <ion-card-title>{{ item.nombre }}</ion-card-title> <!-- Muestra el nombre del negocio -->
+        <ion-card-title>{{ item.nombre }}</ion-card-title>
       </ion-card-header>
+      <ion-card-content>
+        <!-- Mostrar el estado de abierto/cerrado -->
+        <div *ngIf="item.estado === 'Abierto'" class="badge badge-success">
+          Abierto
+        </div>
+        <div *ngIf="item.estado === 'Cerrado'" class="badge badge-danger">
+          Cerrado
+        </div>
+        <!-- Mostrar el horario de apertura y cierre -->
+        <p>
+          Horario: {{ item.hora_apertura }} - {{ item.hora_cierre }}
+        </p>
+      </ion-card-content>
     </ion-card>
   </swiper-slide>
 </swiper-container>

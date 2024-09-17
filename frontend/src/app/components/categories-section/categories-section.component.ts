@@ -75,6 +75,20 @@ import { TiposNegociosService } from 'src/app/services/tipos-negocios.service';
         }
       );
     }
+    getIcon(nombre: string): string {
+      switch (nombre.toLowerCase()) {
+        case 'comida':
+          return 'restaurant';
+        case 'licor':
+          return 'wine';
+        case 'tiendas':
+          return 'cart';
+        case 'servicios':
+          return 'construct';
+        default:
+          return 'help-circle';
+      }
+    }
   
     // Este método se ejecuta cuando se selecciona una categoría
     onCategoriaClick(tipoNegocioId: number) {
