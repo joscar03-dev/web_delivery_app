@@ -18,7 +18,7 @@ class NegociosTableSeeder extends Seeder
             [
                 'nombre' => 'Restaurante A',
                 'imagen' => 'negocios/negocio1.jpg',
-                'tipo_negocio_id' => 5, // Comida
+                'tipo_negocio_id' => 1, // Comida
                 'direccion' => 'Av. Comida 123',
                 'telefono' => '999111111',
                 'email' => 'restaurantea@correo.com',
@@ -31,7 +31,7 @@ class NegociosTableSeeder extends Seeder
             [
                 'nombre' => 'Restaurante B',
                 'imagen' => 'negocios/negocio2.jpeg',
-                'tipo_negocio_id' => 5,
+                'tipo_negocio_id' => 1,
                 'direccion' => 'Av. Comida 456',
                 'telefono' => '999222222',
                 'email' => 'restauranteb@correo.com',
@@ -44,7 +44,7 @@ class NegociosTableSeeder extends Seeder
             [
                 'nombre' => 'Cafetería C',
                 'imagen' => 'negocios/negocio3.jpg',
-                'tipo_negocio_id' => 5,
+                'tipo_negocio_id' => 1,
                 'direccion' => 'Calle Comida 789',
                 'telefono' => '999333333',
                 'email' => 'cafeteriac@correo.com',
@@ -57,7 +57,7 @@ class NegociosTableSeeder extends Seeder
             [
                 'nombre' => 'Pizzería D',
                 'imagen' => 'negocios/negocio4.jpg',
-                'tipo_negocio_id' => 5,
+                'tipo_negocio_id' => 1,
                 'direccion' => 'Plaza Comida 101',
                 'telefono' => '999444444',
                 'email' => 'pizzeriad@correo.com',
@@ -72,7 +72,7 @@ class NegociosTableSeeder extends Seeder
             [
                 'nombre' => 'Bar A',
                 'imagen' => 'negocios/negocio5.webp',
-                'tipo_negocio_id' => 6, // Licor
+                'tipo_negocio_id' => 2, // Licor
                 'direccion' => 'Av. Licor 123',
                 'telefono' => '999555555',
                 'email' => 'bara@correo.com',
@@ -85,7 +85,7 @@ class NegociosTableSeeder extends Seeder
             [
                 'nombre' => 'Discoteca B',
                 'imagen' => 'negocios/negocio6.webp',
-                'tipo_negocio_id' => 6,
+                'tipo_negocio_id' => 2,
                 'direccion' => 'Calle Licor 456',
                 'telefono' => '999666666',
                 'email' => 'discotecab@correo.com',
@@ -98,7 +98,7 @@ class NegociosTableSeeder extends Seeder
             [
                 'nombre' => 'Taberna C',
                 'imagen' => 'negocios/negocio7.jpg',
-                'tipo_negocio_id' => 6,
+                'tipo_negocio_id' => 2,
                 'direccion' => 'Plaza Licor 789',
                 'telefono' => '999777777',
                 'email' => 'tabernac@correo.com',
@@ -111,7 +111,7 @@ class NegociosTableSeeder extends Seeder
             [
                 'nombre' => 'Pub D',
                 'imagen' => 'negocios/negocio8.jpg',
-                'tipo_negocio_id' => 6,
+                'tipo_negocio_id' => 2,
                 'direccion' => 'Calle Licor 101',
                 'telefono' => '999888888',
                 'email' => 'pubd@correo.com',
@@ -126,7 +126,7 @@ class NegociosTableSeeder extends Seeder
             [
                 'nombre' => 'Supermercado A',
                 'imagen' => 'negocios/negocio9.jpg',
-                'tipo_negocio_id' => 7, // Tiendas
+                'tipo_negocio_id' => 3, // Tiendas
                 'direccion' => 'Av. Tiendas 123',
                 'telefono' => '999999999',
                 'email' => 'supera@correo.com',
@@ -139,7 +139,7 @@ class NegociosTableSeeder extends Seeder
             [
                 'nombre' => 'Mini Market B',
                 'imagen' => 'negocios/negocio10.jpg',
-                'tipo_negocio_id' => 7,
+                'tipo_negocio_id' => 3,
                 'direccion' => 'Calle Tiendas 456',
                 'telefono' => '998888888',
                 'email' => 'marketb@correo.com',
@@ -152,7 +152,7 @@ class NegociosTableSeeder extends Seeder
             [
                 'nombre' => 'Ferretería C',
                 'imagen' => 'negocios/negocio11.jpg',
-                'tipo_negocio_id' => 7,
+                'tipo_negocio_id' => 3,
                 'direccion' => 'Calle Tiendas 789',
                 'telefono' => '997777777',
                 'email' => 'ferreteriac@correo.com',
@@ -165,7 +165,7 @@ class NegociosTableSeeder extends Seeder
             [
                 'nombre' => 'Librería D',
                 'imagen' => 'negocios/negocio12.jpg',
-                'tipo_negocio_id' => 7,
+                'tipo_negocio_id' => 3,
                 'direccion' => 'Plaza Tiendas 101',
                 'telefono' => '996666666',
                 'email' => 'libreriad@correo.com',
@@ -180,7 +180,7 @@ class NegociosTableSeeder extends Seeder
             [
                 'nombre' => 'Taller Mecánico A',
                 'imagen' => 'negocios/negocio13.jpg',
-                'tipo_negocio_id' => 8, // Servicios
+                'tipo_negocio_id' => 4, // Servicios
                 'direccion' => 'Av. Servicios 123',
                 'telefono' => '995555555',
                 'email' => 'tallera@correo.com',
@@ -193,7 +193,7 @@ class NegociosTableSeeder extends Seeder
             [
                 'nombre' => 'Lavandería B',
                 'imagen' => 'negocios/negocio14.jpg',
-                'tipo_negocio_id' => 8,
+                'tipo_negocio_id' => 4,
                 'direccion' => 'Calle Servicios 456',
                 'telefono' => '994444444',
                 'email' => 'lavanderiab@correo.com',
@@ -206,7 +206,7 @@ class NegociosTableSeeder extends Seeder
             [
                 'nombre' => 'Servicios Técnicos C',
                 'imagen' => 'negocios/negocio15.jpeg',
-                'tipo_negocio_id' => 8,
+                'tipo_negocio_id' => 4,
                 'direccion' => 'Calle Servicios 789',
                 'telefono' => '993333333',
                 'email' => 'serviciosc@correo.com',
@@ -219,7 +219,7 @@ class NegociosTableSeeder extends Seeder
             [
                 'nombre' => 'Servicios Eléctricos D',
                 'imagen' => 'negocios/negocio16.jpeg',
-                'tipo_negocio_id' => 8,
+                'tipo_negocio_id' => 4,
                 'direccion' => 'Plaza Servicios 101',
                 'telefono' => '992222222',
                 'email' => 'serviciosd@correo.com',

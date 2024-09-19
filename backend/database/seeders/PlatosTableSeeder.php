@@ -20,7 +20,7 @@ class PlatosTableSeeder extends Seeder
                 'precio' => 12.50,
                 'imagen' => 'platos/EnsaladaMixta.jpeg',
                 'categoria_id' => 1, // Entrada
-                'negocio_id' => 34, // Suponiendo que el negocio 1 es de tipo comida
+                'negocio_id' => 1, // Suponiendo que el negocio 1 es de tipo comida
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -30,7 +30,7 @@ class PlatosTableSeeder extends Seeder
                 'precio' => 35.00,
                 'imagen' => 'platos/polloBrasa.jpg',
                 'categoria_id' => 2, // Plato Principal
-                'negocio_id' => 34, // Suponiendo que el negocio 1 es de tipo comida
+                'negocio_id' => 1, // Suponiendo que el negocio 1 es de tipo comida
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -40,7 +40,7 @@ class PlatosTableSeeder extends Seeder
                 'precio' => 28.00,
                 'imagen' => 'platos/lomo_saltado.jpg',
                 'categoria_id' => 2, // Plato Principal
-                'negocio_id' => 35, // Suponiendo que el negocio 1 es de tipo comida
+                'negocio_id' => 2, // Suponiendo que el negocio 1 es de tipo comida
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -50,7 +50,7 @@ class PlatosTableSeeder extends Seeder
                 'precio' => 5.00,
                 'imagen' => 'platos/inka-kola.jpeg',
                 'categoria_id' => 3, // Bebidas
-                'negocio_id' => 35, // Suponiendo que el negocio 1 es de tipo comida
+                'negocio_id' => 2, // Suponiendo que el negocio 1 es de tipo comida
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -61,7 +61,7 @@ class PlatosTableSeeder extends Seeder
                 'precio' => 30.00,
                 'imagen' => 'platos/ceviche.jpeg',
                 'categoria_id' => 2, // Plato Principal
-                'negocio_id' => 36, // Suponiendo que el negocio 2 es de tipo comida
+                'negocio_id' => 3, // Suponiendo que el negocio 2 es de tipo comida
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -71,7 +71,7 @@ class PlatosTableSeeder extends Seeder
                 'precio' => 7.00,
                 'imagen' => 'platos/jugo-naranja.jpg',
                 'categoria_id' => 3, // Bebidas
-                'negocio_id' => 36, // Suponiendo que el negocio 2 es de tipo comida
+                'negocio_id' => 3, // Suponiendo que el negocio 2 es de tipo comida
                 'created_at' => now(),
                 'updated_at' => now(),
             ]

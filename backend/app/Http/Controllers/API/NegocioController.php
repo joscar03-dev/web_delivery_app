@@ -34,8 +34,12 @@ class NegocioController extends Controller
     // Obtener un negocio específico y sus platos
     public function show($id)
     {
+        // Obtener el negocio con sus platos y las categorías de los platos
         $negocio = Negocio::with('platos.categoria')->findOrFail($id);
-        $negocio = Negocio::find(1);
+
+        // Transformar la imagen para que utilice la URL del storage si es necesario
+        $negocio->imagen = $negocio->imagen ? url('storage/' . $negocio->imagen) : null;
+
         return response()->json($negocio);
     }
 
