@@ -21,9 +21,16 @@ class Negocio extends Model
         'hora_cierre',
         'estado',
     ];
-    public function platos()
+
+    public function categorias()
     {
-        return $this->hasMany(Plato::class);
+        return $this->hasMany(Categoria::class, 'negocio_id');
+    }
+
+    // Relación con los platos (a través de las categorías)
+    public function productos()
+    {
+        return $this->hasManyThrough(Producto::class, Categoria::class, 'negocio_id', 'categoria_id');
     }
 
     public function tipoNegocio()
@@ -46,7 +53,7 @@ class Negocio extends Model
 
         // Verifica si hora_apertura o hora_cierre son nulos
         if (is_null($this->hora_apertura) || is_null($this->hora_cierre)) {
-            return 'Cerrado';
+            return 'Sin Hora';
         }
 
         try {

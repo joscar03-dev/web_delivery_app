@@ -4,8 +4,8 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CarritoController;
 use App\Http\Controllers\API\NegocioController;
 use App\Http\Controllers\API\PedidoController;
-use App\Http\Controllers\PlatoController;
 use App\Http\Controllers\API\TipoNegocioController;
+use App\Http\Controllers\ProductoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/platos', [PlatoController::class, 'index']);
+Route::get('/productos', [ProductoController::class, 'index']);
 
 // NUEVOS
 Route::middleware('auth:sanctum')->group(function () {

@@ -21,7 +21,7 @@ class NegocioController extends Controller
                 return $negocio;
             });
         } else {
-            $negocios = Negocio::with('platos.categoria')->get()->map(function ($negocio) {
+            $negocios = Negocio::with('productos.categoria')->get()->map(function ($negocio) {
                 $negocio->imagen = $negocio->imagen ? url('storage/' . $negocio->imagen) : null;
                 $negocio->estado = $negocio->estado;
                 return $negocio;
@@ -35,7 +35,7 @@ class NegocioController extends Controller
     public function show($id)
     {
         // Obtener el negocio con sus platos y las categorías de los platos
-        $negocio = Negocio::with('platos.categoria')->findOrFail($id);
+        $negocio = Negocio::with('productos.categoria')->findOrFail($id);
 
         // Transformar la imagen para que utilice la URL del storage si es necesario
         $negocio->imagen = $negocio->imagen ? url('storage/' . $negocio->imagen) : null;

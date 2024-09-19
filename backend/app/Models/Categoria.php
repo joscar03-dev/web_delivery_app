@@ -9,4 +9,12 @@ class Categoria extends Model
 {
     use HasFactory;
     protected $fillable = ['nombre'];
+    public function negocio()
+    {
+        return $this->belongsTo(Negocio::class, 'negocio_id');
+    }
+    public function productos()
+    {
+        return $this->hasMany(Producto::class, 'categoria_id');
+    }
 }

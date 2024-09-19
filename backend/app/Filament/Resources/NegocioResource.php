@@ -7,11 +7,13 @@ use App\Filament\Resources\NegocioResource\RelationManagers;
 use App\Models\Negocio;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -60,6 +62,7 @@ class NegocioResource extends Resource
     {
         return $form
             ->schema([
+                // Sección 1: Crear el negocio
                 TextInput::make('nombre')
                     ->label('Nombre del Negocio')
                     ->required()
@@ -79,19 +82,62 @@ class NegocioResource extends Resource
                     ->relationship('tipoNegocio', 'nombre'),
                 TextInput::make('horario_atencion')
                     ->label('Horario de Atención'),
-                // ->required(),
                 FileUpload::make('imagen')->image(),
                 TimePicker::make('hora_apertura')
                     ->label('Hora de Apertura')
-                    ->required()
-                    ->placeholder('Seleccione la hora de apertura'),
-
+                    ->required(),
                 TimePicker::make('hora_cierre')
                     ->label('Hora de Cierre')
-                    ->required()
-                    ->placeholder('Seleccione la hora de cierre'),
+                    ->required(),
+
+                // Sección de categorías (solo visible si el negocio ya está guardado)
+                Forms\Components\Section::make('Categorías del Negocio')
+                    ->schema([
+                        Repeater::make('categorias')
+                            ->relationship('categorias')
+                            ->schema([
+                                TextInput::make('nombre')
+                                    ->label('Nombre de la Categoría')
+                                    ->required(),
+                            ])
+                            ->minItems(1)
+                            ->createItemButtonLabel('Agregar categoría'), // Volver a usar createItemButtonLabel()
+                    ])
+                    ->visible(fn($livewire) => $livewire->model->exists), // Solo si el negocio ya existe
+
+                // Sección de productos (solo visible si ya existen categorías)
+                Forms\Components\Section::make('Productos de Categoría')
+                    ->schema([
+                        Select::make('categoria_id')
+                            ->label('Seleccionar Categoría')
+                            ->relationship('categorias', 'nombre')
+                            ->required()
+                            ->afterStateUpdated(function ($state, callable $set) {
+                                // Cargar productos automáticamente según la categoría seleccionada
+                                $set('productos', \App\Models\Producto::where('categoria_id', $state)->get());
+                            }),
+
+                        Repeater::make('productos')
+                            ->schema([
+                                TextInput::make('nombre')
+                                    ->label('Nombre del Producto')
+                                    ->required(),
+                                TextInput::make('descripcion')
+                                    ->label('Descripción del Producto')
+                                    ->required(),
+                                TextInput::make('precio')
+                                    ->label('Precio')
+                                    ->required()
+                                    ->numeric(),
+                                FileUpload::make('imagen')->image(),
+                            ])
+                            ->minItems(1)
+                            ->createItemButtonLabel('Agregar Producto'), // Volver a usar createItemButtonLabel()
+                    ])
+                    ->visible(fn($livewire) => $livewire->model->exists && \App\Models\Categoria::where('negocio_id', $livewire->model->id)->exists()),
             ]);
     }
+
 
     public static function getRelations(): array
     {
