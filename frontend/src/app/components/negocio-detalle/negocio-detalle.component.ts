@@ -31,6 +31,7 @@ export class NegocioDetalleComponent implements OnInit {
   loadNegocio(id: number) {
     this.negocioService.getNegocioById(id).subscribe(
       (data: Negocio) => {
+        console.log('se carga el dato?:', id);
         this.negocio = data;
       },
       (error) => {
