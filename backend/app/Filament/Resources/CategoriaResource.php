@@ -5,7 +5,9 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CategoriaResource\Pages;
 use App\Filament\Resources\CategoriaResource\RelationManagers;
 use App\Models\Categoria;
+use App\Models\Negocio;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -26,6 +28,11 @@ class CategoriaResource extends Resource
         return $form
             ->schema([
                 TextInput::make('nombre')->required(),
+                Select::make('negocio_id')
+                    ->options(Negocio::all()->pluck('nombre','id'))
+                    ->relationship('negocio', 'nombre')
+                    ->searchable()
+                    ->required(),
             ]);
     }
 
@@ -34,7 +41,7 @@ class CategoriaResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('nombre')->sortable()->searchable(),
-                TextColumn::make('created_at')->label('Fecha de creación')->dateTime(),
+                TextColumn::make('negocio.nombre')->sortable()->searchable()
             ])
             ->filters([
                 // Agregar filtros si es necesario
