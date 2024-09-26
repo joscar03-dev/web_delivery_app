@@ -15,7 +15,7 @@ class NegocioController extends Controller
         $tipoNegocioId = $request->query('tipo_negocio_id');
 
         if ($tipoNegocioId) {
-            $negocios = Negocio::where('tipo_negocio_id', $tipoNegocioId)->with('platos.categoria')->get()->map(function ($negocio) {
+            $negocios = Negocio::where('tipo_negocio_id', $tipoNegocioId)->with('productos.categoria')->get()->map(function ($negocio) {
                 $negocio->imagen = $negocio->imagen ? url('storage/' . $negocio->imagen) : null; //poner storage si usamos el storage
                 $negocio->estado = $negocio->estado;
                 return $negocio;
