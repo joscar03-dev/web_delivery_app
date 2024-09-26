@@ -29,12 +29,13 @@ export class NegocioService {
     return this.http.get<Negocio[]>(url)
   }
 
-  /* private apiUrl = 'http://localhost:8000/api/negocios';  
+  // Obtener las categorías de un negocio
+  getCategoriasByNegocio(negocioId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/negocios/${negocioId}/categorias`);
+  }
 
-  constructor(private http: HttpClient) {}
-
-  
-  getNegocios(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
-  } */
+  // Obtener los productos de una categoría
+  getProductosByCategoria(categoriaId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/categorias/${categoriaId}/productos`);
+  }
 }
