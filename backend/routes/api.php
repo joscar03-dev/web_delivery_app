@@ -5,8 +5,8 @@ use App\Http\Controllers\API\CarritoController;
 use App\Http\Controllers\API\CategoriaController;
 use App\Http\Controllers\API\NegocioController;
 use App\Http\Controllers\API\PedidoController;
+use App\Http\Controllers\API\ProductoController;
 use App\Http\Controllers\API\TipoNegocioController;
-use App\Http\Controllers\ProductoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
