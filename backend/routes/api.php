@@ -41,6 +41,9 @@ Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logou
 //API Categorias
 Route::get('negocios/{negocioId}/categorias', [CategoriaController::class, 'obtenerCategoriasPorNegocio']);
 
+//API productos
+Route::get('categorias/{categoriaId}/productos', [ProductoController::class, 'obtenerProductosPorCategoria']);
+
 // API de negocios
 Route::get('negocios', [NegocioController::class, 'index']);
     Route::get('negocios/{id}', [NegocioController::class, 'show']);
