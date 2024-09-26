@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PlatoResource\Pages;
 use App\Filament\Resources\PlatoResource\RelationManagers;
 use App\Models\Plato;
+use App\Models\Producto;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
@@ -21,7 +22,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PlatoResource extends Resource
 {
-    protected static ?string $model = Plato::class;
+    protected static ?string $model = Producto::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
