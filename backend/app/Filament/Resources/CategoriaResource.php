@@ -95,6 +95,7 @@ class CategoriaResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('id')->label('ID')->sortable(),
                 TextColumn::make('nombre')->sortable()->searchable(),
                 TextColumn::make('negocio.nombre')->sortable()->searchable()
             ])
