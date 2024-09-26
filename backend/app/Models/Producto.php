@@ -27,6 +27,6 @@ class Producto extends Model
     }
     public function negocio()
     {
-        return $this->belongsToThrough(Negocio::class, Categoria::class, 'negocio_id', 'categoria_id');
+        return $this->belongsTo(Negocio::class, 'negocio_id');
     }
 }
