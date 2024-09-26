@@ -7,8 +7,10 @@ use App\Filament\Resources\CategoriaResource\RelationManagers;
 use App\Models\Categoria;
 use App\Models\Negocio;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -29,10 +31,63 @@ class CategoriaResource extends Resource
             ->schema([
                 TextInput::make('nombre')->required(),
                 Select::make('negocio_id')
-                    ->options(Negocio::all()->pluck('nombre','id'))
                     ->relationship('negocio', 'nombre')
                     ->searchable()
-                    ->required(),
+                    ->required()
+                    ->createOptionForm([
+                        TextInput::make('nombre')
+                            ->label('Nombre del Negocio')
+                            ->required()
+                            ->maxLength(255),
+                        TextInput::make('direccion')
+                            ->label('Dirección del Negocio')
+                            ->required(),
+                        TextInput::make('telefono')
+                            ->label('Teléfono del Negocio')
+                            ->required()
+                            ->maxLength(15),
+                        TextInput::make('email')
+                            ->label('Email del Negocio')
+                            ->email()
+                            ->required(),
+                        Select::make('tipo_negocio_id')
+                            ->relationship('tipoNegocio', 'nombre')
+                            ->required(),
+                        TimePicker::make('hora_apertura')
+                            ->label('Hora de Apertura')
+                            ->required(),
+                        TimePicker::make('hora_cierre')
+                            ->label('Hora de Cierre')
+                            ->required(),
+                        FileUpload::make('imagen')->image(),
+                    ])
+                    ->editOptionForm([
+                        TextInput::make('nombre')
+                            ->label('Nombre del Negocio')
+                            ->required()
+                            ->maxLength(255),
+                        TextInput::make('direccion')
+                            ->label('Dirección del Negocio')
+                            ->required(),
+                        TextInput::make('telefono')
+                            ->label('Teléfono del Negocio')
+                            ->required()
+                            ->maxLength(15),
+                        TextInput::make('email')
+                            ->label('Email del Negocio')
+                            ->email()
+                            ->required(),
+                        Select::make('tipo_negocio_id')
+                            ->relationship('tipoNegocio', 'nombre')
+                            ->required(),
+                        TimePicker::make('hora_apertura')
+                            ->label('Hora de Apertura')
+                            ->required(),
+                        TimePicker::make('hora_cierre')
+                            ->label('Hora de Cierre')
+                            ->required(),
+                        FileUpload::make('imagen')->image(),
+                    ]),
             ]);
     }
 
