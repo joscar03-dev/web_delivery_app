@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CarritoController;
+use App\Http\Controllers\API\CategoriaController;
 use App\Http\Controllers\API\NegocioController;
 use App\Http\Controllers\API\PedidoController;
 use App\Http\Controllers\API\TipoNegocioController;
@@ -37,6 +38,9 @@ Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logou
 
 
 //lo que removi de auth:sanctum
+//API Categorias
+Route::get('negocios/{negocioId}/categorias', [CategoriaController::class, 'obtenerCategoriasPorNegocio']);
+
 // API de negocios
 Route::get('negocios', [NegocioController::class, 'index']);
     Route::get('negocios/{id}', [NegocioController::class, 'show']);
