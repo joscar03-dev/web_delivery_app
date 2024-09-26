@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Categoria extends Model
 {
     use HasFactory;
-    protected $fillable = ['nombre'];
+    protected $fillable = [
+        'nombre',
+        'negocio_id'
+    ];
     public function negocio()
     {
         return $this->belongsTo(Negocio::class, 'negocio_id');
