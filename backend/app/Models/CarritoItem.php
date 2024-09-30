@@ -13,8 +13,8 @@ class CarritoItem extends Model
         return $this->belongsTo(Carrito::class);
     }
 
-    public function plato()
+    public function producto()
     {
-        return $this->belongsTo(Plato::class);
+        return $this->belongsTo(Producto::class);
     }
 }
