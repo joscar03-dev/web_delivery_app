@@ -21,9 +21,6 @@
 
         <!-- Mostrar el horario de apertura y cierre -->
         <p>Horario: {{ negocio.hora_apertura }} - {{ negocio.hora_cierre }}</p>
-        <div *ngIf="!negocio.platos || negocio.platos.length === 0">
-          <p>No hay platos disponibles.</p>
-        </div>
       </ion-card-content>
     </ion-card>
     <!-- Botones de categorías -->
@@ -54,7 +51,10 @@
 
     <!-- Mostrar mensaje si no hay productos -->
     <div *ngIf="categoriaSeleccionada && productos.length === 0">
-      <p>No hay productos disponibles para esta categoría.</p>
+      <ion-spinner *ngIf="productos.length === 0">
+        
+      </ion-spinner>
+      <ion-label>No hay productos en esta categoría</ion-label>
     </div>
   </div>
 
