@@ -28,14 +28,15 @@ export class NegocioService {
     const url = `${this.apiUrl}/${id}`;
     return this.http.get<Negocio[]>(url)
   }
-
-  // Obtener las categorías de un negocio
-  getCategoriasByNegocio(negocioId: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/negocios/${negocioId}/categorias`);
+  // Obtener las categorías de un negocio por su ID
+  getCategoriasByNegocio(negocioId: number): Observable<any[]> {
+    const url = `${this.apiUrl}/${negocioId}/categorias`;
+    return this.http.get<any[]>(url);
   }
 
-  // Obtener los productos de una categoría
-  getProductosByCategoria(categoriaId: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/categorias/${categoriaId}/productos`);
+  // Obtener los productos de una categoría por su ID
+  getProductosByCategoria(categoriaId: number): Observable<any[]> {
+    const url = `http://localhost:8000/api/categorias/${categoriaId}/productos`;
+    return this.http.get<any[]>(url);
   }
 }
