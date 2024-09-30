@@ -18,6 +18,7 @@ export class NegocioDetalleComponent implements OnInit {
   categorias: any[] = []; // Para almacenar las categorías del negocio
   productos: any[] = []; // Para almacenar los productos de la categoría seleccionada
   categoriaSeleccionada: number | null = null; // Para identificar la categoría seleccionada
+  cantidades: { [productoId: number]: number } = {};
   constructor(
     private route: ActivatedRoute,
     private negocioService: NegocioService
@@ -66,4 +67,20 @@ export class NegocioDetalleComponent implements OnInit {
       }
     );
   }
+
+    // Incrementar la cantidad del producto seleccionado
+    incrementarCantidad(productoId: number) {
+      if (!this.cantidades[productoId]) {
+        this.cantidades[productoId] = 1;
+      } else {
+        this.cantidades[productoId]++;
+      }
+    }
+  
+    // Decrementar la cantidad del producto seleccionado
+    decrementarCantidad(productoId: number) {
+      if (this.cantidades[productoId] > 0) {
+        this.cantidades[productoId]--;
+      }
+    }
 }

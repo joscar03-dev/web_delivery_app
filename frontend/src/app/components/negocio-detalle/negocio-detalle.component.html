@@ -45,6 +45,11 @@
             <p>{{ producto.descripcion }}</p>
             <p>Precio: {{ producto.precio | currency }}</p>
           </ion-label>
+          <div class="contador">
+            <ion-button (click)="decrementarCantidad(producto.id)" fill="outline" size="small">-</ion-button>
+            <span>{{ cantidades[producto.id] || 0 }}</span>
+            <ion-button (click)="incrementarCantidad(producto.id)" fill="outline" size="small">+</ion-button>
+          </div>
         </ion-item>
       </ion-list>
     </div>
