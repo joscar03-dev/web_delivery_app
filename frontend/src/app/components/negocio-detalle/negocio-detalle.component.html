@@ -1,7 +1,9 @@
 <ion-content>
   <div *ngIf="negocio">
     <ion-card>
-      <ion-img [src]="negocio.imagen ? negocio.imagen : 'assets/img/defecto.jpg'"></ion-img>
+      <ion-img
+        [src]="negocio.imagen ? negocio.imagen : 'assets/img/defecto.jpg'"
+      ></ion-img>
       <ion-card-header>
         <ion-card-title>{{ negocio.nombre }}</ion-card-title>
       </ion-card-header>
@@ -10,27 +12,52 @@
         <p>{{ negocio.email }}</p>
 
         <!-- Mostrar el estado de abierto/cerrado -->
-        <div *ngIf="negocio.estado === 'Abierto'" class="badge badge-success">Abierto</div>
-        <div *ngIf="negocio.estado === 'Cerrado'" class="badge badge-danger">Cerrado</div>
+        <div *ngIf="negocio.estado === 'Abierto'" class="badge badge-success">
+          Abierto
+        </div>
+        <div *ngIf="negocio.estado === 'Cerrado'" class="badge badge-danger">
+          Cerrado
+        </div>
 
         <!-- Mostrar el horario de apertura y cierre -->
         <p>Horario: {{ negocio.hora_apertura }} - {{ negocio.hora_cierre }}</p>
-
-        <!-- Mostrar los platos del negocio -->
-        <div *ngIf="negocio.platos && negocio.platos.length > 0">
-          <h5>Platos Disponibles:</h5>
-          <ul>
-            <li *ngFor="let plato of negocio.platos">
-              <strong>{{ plato.nombre }}</strong>: {{ plato.descripcion }} - S/{{ plato.precio }}
-            </li>
-          </ul>
-        </div>
         <div *ngIf="!negocio.platos || negocio.platos.length === 0">
           <p>No hay platos disponibles.</p>
         </div>
       </ion-card-content>
     </ion-card>
+    <!-- Botones de categorías -->
+    <div *ngIf="categorias.length > 0">
+      <ion-button
+        *ngFor="let categoria of categorias"
+        (click)="loadProductos(categoria.id)"
+      >
+        {{ categoria.nombre }}
+      </ion-button>
+    </div>
+
+    <!-- Lista de productos de la categoría seleccionada -->
+    <div *ngIf="productos.length > 0">
+      <ion-list>
+        <ion-item *ngFor="let producto of productos">
+          <ion-thumbnail slot="start">
+            <img [src]="producto.imagen" alt="{{ producto.nombre }}" />
+          </ion-thumbnail>
+          <ion-label>
+            <h2>{{ producto.nombre }}</h2>
+            <p>{{ producto.descripcion }}</p>
+            <p>Precio: {{ producto.precio | currency }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <!-- Mostrar mensaje si no hay productos -->
+    <div *ngIf="categoriaSeleccionada && productos.length === 0">
+      <p>No hay productos disponibles para esta categoría.</p>
+    </div>
   </div>
 
-  <ion-spinner *ngIf="!negocio"></ion-spinner> <!-- Spinner mientras se carga el negocio -->
+  <ion-spinner *ngIf="!negocio"></ion-spinner>
+  <!-- Spinner mientras se carga el negocio -->
 </ion-content>

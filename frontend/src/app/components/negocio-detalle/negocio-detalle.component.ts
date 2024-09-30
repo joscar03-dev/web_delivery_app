@@ -15,6 +15,9 @@ import { CommonModule } from '@angular/common';
 })
 export class NegocioDetalleComponent implements OnInit {
   negocio: Negocio | undefined;
+  categorias: any[] = []; // Para almacenar las categorías del negocio
+  productos: any[] = []; // Para almacenar los productos de la categoría seleccionada
+  categoriaSeleccionada: number | null = null; // Para identificar la categoría seleccionada
   constructor(
     private route: ActivatedRoute,
     private negocioService: NegocioService
@@ -25,6 +28,7 @@ export class NegocioDetalleComponent implements OnInit {
 
     if (id) {
       this.loadNegocio(parseInt(id, 10));
+      this.loadCategorias(parseInt(id, 10));
     }
   }
 
@@ -36,6 +40,29 @@ export class NegocioDetalleComponent implements OnInit {
       },
       (error) => {
         console.error('Error al cargar los detalles de negocio', error);
+      }
+    );
+  }
+
+  loadCategorias(negocioId: number) {
+    this.negocioService.getCategoriasByNegocio(negocioId).subscribe(
+      (data: any) => {
+        this.categorias = data;
+      },
+      (error) => {
+        console.error('Error al cargar las categorías', error);
+      }
+    );
+  }
+
+  loadProductos(categoriaId: number) {
+    this.categoriaSeleccionada = categoriaId;
+    this.negocioService.getProductosByCategoria(categoriaId).subscribe(
+      (data: any) => {
+        this.productos = data;
+      },
+      (error) => {
+        console.error('Error al cargar los productos de la categoria', error);
       }
     );
   }
