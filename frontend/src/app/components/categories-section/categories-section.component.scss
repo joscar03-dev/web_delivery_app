@@ -32,3 +32,10 @@ ion-spinner {
   background-color: red;
   color: white;
 }
+
+.negocio-imagen {
+  width: 100%;           /* Ocupa todo el ancho del contenedor */
+  height: 200px;         /* Fijar una altura para las imágenes */
+  object-fit: cover;     /* Recorta la imagen para que quepa sin deformarse */
+  border-radius: 8px;    /* Bordes redondeados para mantener la consistencia con el card */
+}
