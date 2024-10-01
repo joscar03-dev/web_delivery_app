@@ -4,23 +4,25 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Categoria;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 
 class ProductoController extends Controller
 {
+    public function index()
+    {
+        $productos = Producto::all();
+        return response()->json($productos);
+    }
     public function obtenerProductosPorCategoria($categoriaId)
     {
-        // Verificamos si la categoría existe
-        $categoria = Categoria::find($categoriaId);
 
+        $categoria = Categoria::find($categoriaId);
         if (!$categoria) {
             return response()->json(['mensaje' => 'Categoría no encontrada'], 404);
         }
 
-        // Obtenemos los productos de la categoría
         $productos = $categoria->productos()->get();
-
-        // Retornamos los productos en formato JSON
         return response()->json($productos);
     }
 }
