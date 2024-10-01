@@ -20,9 +20,10 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         
-        $this->call(TipoNegociosTableSeeder::class);
-        $this->call(NegociosTableSeeder::class);
-        $this->call(CategoriaPlatosTableSeeder::class);
-        $this->call(PlatosTableSeeder::class);
+        //$this->call(TipoNegociosTableSeeder::class);
+        //$this->call(NegociosTableSeeder::class);
+        //$this->call(RolesSeeder::class);
+        //$this->call(CategoriasSeeder::class);
+        $this->call(ProductosSeeder::class);
     }
 }
