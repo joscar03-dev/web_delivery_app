@@ -24,12 +24,13 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class PlatoResource extends Resource
 {
     protected static ?string $model = Producto::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-cube';
 
     public static function form(Form $form): Form
     {
@@ -146,6 +147,9 @@ class PlatoResource extends Resource
                 ImageColumn::make('imagen'),
                 TextColumn::make('categoria.nombre')->label('Categoría'),
                 TextColumn::make('created_at')->label('Fecha de creación')->dateTime(),
+            ])
+            ->BulkActions([
+                ExportBulkAction::make()
             ]);
     }
 
