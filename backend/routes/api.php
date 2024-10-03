@@ -59,7 +59,9 @@ Route::get('negocios', [NegocioController::class, 'index']);
     Route::get('pedidos', [PedidoController::class, 'getPedidos']);
     Route::get('pedidos/{id}', [PedidoController::class, 'getPedidoById']);
 
+    // API AUTH
     Route::post('register', [AuthController::class, 'register']);
     Route::post('login', [AuthController::class, 'login']);
+
 //API TIPO DE NEGOCIOS
 Route::get('/tipos-negocios', [TipoNegocioController::class, 'index']);
