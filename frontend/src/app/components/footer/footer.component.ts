@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
@@ -8,6 +9,8 @@ import { IonicModule } from '@ionic/angular';
   standalone: true,
   imports: [
     IonicModule, 
+    RouterModule,
+    
   ]
 })
 export class FooterComponent {
