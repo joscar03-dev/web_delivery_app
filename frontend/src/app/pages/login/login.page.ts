@@ -24,7 +24,7 @@ export class LoginPage {
     console.log(this.form);
     this.authService.login(this.form).subscribe(
       response => {
-        localStorage.setItem('token', response.access_token);
+        this.authService.setToken(response.access_token);
         this.router.navigate(['/home']);
       },
       error => {

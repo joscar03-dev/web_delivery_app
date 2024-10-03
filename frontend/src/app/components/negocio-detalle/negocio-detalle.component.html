@@ -49,6 +49,9 @@
             <ion-button (click)="decrementarCantidad(producto.id)" fill="outline" size="small">-</ion-button>
             <span>{{ cantidades[producto.id] || 0 }}</span>
             <ion-button (click)="incrementarCantidad(producto.id)" fill="outline" size="small">+</ion-button>
+            <ion-button (click)="agregarAlCarrito(producto.id, producto.precio)" color="primary">
+              Agregar al Carrito
+            </ion-button>
           </div>
         </ion-item>
       </ion-list>

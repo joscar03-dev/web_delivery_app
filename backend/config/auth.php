@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api' => [
+            'driver' => 'jwt',  // Cambia esto según si usas Passport, Sanctum o JWT
+            'provider' => 'users',
+            'hash' => false,
+        ],
     ],
 
     /*

@@ -28,12 +28,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/platos', [ProductoController::class, 'index']);
 
 // NUEVOS
-Route::middleware(['auth:sanctum'])->group(function () {
+/* Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-});
+    // API del carrito
+    Route::get('carrito', [CarritoController::class, 'getCarrito']);
+    Route::post('carrito/add', [CarritoController::class, 'addProducto']);
+    Route::delete('carrito/remove/{id}', [CarritoController::class, 'removeProducto']);
+}); */
 
+Route::middleware('auth:api')->group(function () {
+    Route::post('/carrito/add', [CarritoController::class, 'addProducto']);
+});
 
 Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
 
@@ -47,21 +54,18 @@ Route::get('categorias/{categoriaId}/productos', [ProductoController::class, 'ob
 
 // API de negocios
 Route::get('negocios', [NegocioController::class, 'index']);
-    Route::get('negocios/{id}', [NegocioController::class, 'show']);
+Route::get('negocios/{id}', [NegocioController::class, 'show']);
 
-    // API del carrito
-    Route::get('carrito', [CarritoController::class, 'getCarrito']);
-    Route::post('carrito/add', [CarritoController::class, 'addProducto']);
-    Route::delete('carrito/remove/{id}', [CarritoController::class, 'removeProducto']);
 
-    // API de pedidos
-    Route::post('pedidos/checkout', [PedidoController::class, 'checkout']);
-    Route::get('pedidos', [PedidoController::class, 'getPedidos']);
-    Route::get('pedidos/{id}', [PedidoController::class, 'getPedidoById']);
 
-    // API AUTH
-    Route::post('register', [AuthController::class, 'register']);
-    Route::post('login', [AuthController::class, 'login']);
+// API de pedidos
+Route::post('pedidos/checkout', [PedidoController::class, 'checkout']);
+Route::get('pedidos', [PedidoController::class, 'getPedidos']);
+Route::get('pedidos/{id}', [PedidoController::class, 'getPedidoById']);
+
+// API AUTH
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
 
 //API TIPO DE NEGOCIOS
 Route::get('/tipos-negocios', [TipoNegocioController::class, 'index']);

@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { NegocioService } from '../../services/negocio.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Negocio } from '../categories-section/categories-section.component';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ToastController  } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
+import { CarritoService } from 'src/app/services/carrito.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptorService } from 'src/app/services/auth-interceptor.service';
 
 @Component({
   selector: 'app-negocio-detalle',
@@ -11,7 +14,16 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./negocio-detalle.component.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule, RouterModule],
-  providers: [NegocioService],
+  providers: [
+    NegocioService, 
+    CarritoService,
+    {
+      provide: HTTP_INTERCEPTORS,  // Aquí registras el interceptor
+      useClass: AuthInterceptorService,
+      multi: true
+    }
+
+  ],
 })
 export class NegocioDetalleComponent implements OnInit {
   negocio: Negocio | undefined;
@@ -21,7 +33,11 @@ export class NegocioDetalleComponent implements OnInit {
   cantidades: { [productoId: number]: number } = {};
   constructor(
     private route: ActivatedRoute,
-    private negocioService: NegocioService
+    private negocioService: NegocioService,
+    private carritoService: CarritoService,
+    private router: RouterModule,  // Para redireccionar al carrito
+    private toastController: ToastController,
+
   ) {}
 
   ngOnInit() {
@@ -82,5 +98,35 @@ export class NegocioDetalleComponent implements OnInit {
       if (this.cantidades[productoId] > 0) {
         this.cantidades[productoId]--;
       }
+    }
+
+    agregarAlCarrito(productoId: number, precio: number) {
+      const cantidad = this.cantidades[productoId] || 1;  // Si no se ha seleccionado, por defecto es 1
+  
+      const producto = {
+        productoId,
+        cantidad,
+        precio,
+      };
+  
+      this.carritoService.agregarProducto(producto).subscribe(
+        async () => {
+          const toast = await this.toastController.create({
+            message: 'Producto agregado al carrito',
+            duration: 2000,
+            color: 'success'
+          });
+          toast.present();
+        },
+        async (error) => {
+          const toast = await this.toastController.create({
+            message: 'Error al agregar producto al carrito',
+            duration: 2000,
+            color: 'danger'
+          });
+          toast.present();
+          console.error('Error al agregar producto al carrito', error);
+        }
+      );
     }
 }
