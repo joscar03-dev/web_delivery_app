@@ -38,8 +38,8 @@ Route::get('/platos', [ProductoController::class, 'index']);
     Route::delete('carrito/remove/{id}', [CarritoController::class, 'removeProducto']);
 }); */
 
-Route::middleware('auth:api')->group(function () {
-    Route::post('/carrito/add', [CarritoController::class, 'addProducto']);
+Route::group(['middleware' => ['jwt.auth']], function() {
+    Route::post('/carrito/add', [CarritoController::class, 'agregarProducto']);
 });
 
 Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);

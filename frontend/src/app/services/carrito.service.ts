@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,14 +9,19 @@ import { Observable } from 'rxjs';
 export class CarritoService {
   private apiUrl = 'http://localhost:8000/api/carrito';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   obtenerCarrito(): Observable<any> {
     return this.http.get(`${this.apiUrl}`);
   }
 
   agregarProducto(producto: { productoId: number; cantidad: number; precio: number }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/add`, producto);
+    // Obtenemos el token desde el AuthService
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    // Enviamos la solicitud con el token JWT en la cabecera
+    return this.http.post(`${this.apiUrl}/add`, producto, { headers });
   }
 
   eliminarProducto(id: number): Observable<any> {
