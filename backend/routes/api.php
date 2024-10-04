@@ -28,7 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/platos', [ProductoController::class, 'index']);
 
 // NUEVOS
-/* Route::middleware(['auth:sanctum'])->group(function () {
+Route::middleware(['auth:api'])->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
@@ -36,10 +36,11 @@ Route::get('/platos', [ProductoController::class, 'index']);
     Route::get('carrito', [CarritoController::class, 'getCarrito']);
     Route::post('carrito/add', [CarritoController::class, 'addProducto']);
     Route::delete('carrito/remove/{id}', [CarritoController::class, 'removeProducto']);
-}); */
+});
 
 Route::group(['middleware' => ['jwt.auth']], function() {
     Route::post('/carrito/add', [CarritoController::class, 'agregarProducto']);
+    Route::get('carrito', [CarritoController::class, 'getCarrito']);
 });
 
 Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);

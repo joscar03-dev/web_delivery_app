@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Carrito;
 use App\Models\CarritoItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 /* class CarritoController extends Controller
 {
@@ -96,6 +97,7 @@ class CarritoController extends Controller
     // Agregar un producto al carrito
     public function addProducto(Request $request)
     {
+        Log::info('Datos recibidos en addProducto:', $request->all());
         // Validar los datos de entrada
         $request->validate([
             'productoId' => 'required|integer|exists:productos,id',
@@ -127,6 +129,7 @@ class CarritoController extends Controller
 
         // Devolver el carrito actualizado
         $carrito->load('items.producto.negocio');
+        // dd($request->all());
         return response()->json($carrito, 200);
     }
 

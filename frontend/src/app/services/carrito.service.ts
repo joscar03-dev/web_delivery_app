@@ -20,6 +20,7 @@ export class CarritoService {
     const token = this.authService.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
+    console.log(this.authService.getToken());
     // Enviamos la solicitud con el token JWT en la cabecera
     return this.http.post(`${this.apiUrl}/add`, producto, { headers });
   }
