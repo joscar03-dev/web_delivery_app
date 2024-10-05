@@ -7,25 +7,22 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class CarritoService {
-  private apiUrl = 'http://localhost:8000/api/carrito';
+  private apiUrl = 'http://127.0.0.1:8000/api';
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient) {}
 
-  obtenerCarrito(): Observable<any> {
-    return this.http.get(`${this.apiUrl}`);
+  addToCart(productId: number, quantity: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/cart/add`, {
+      product_id: productId,
+      quantity,
+    });
   }
 
-  agregarProducto(producto: { productoId: number; cantidad: number; precio: number }): Observable<any> {
-    // Obtenemos el token desde el AuthService
-    const token = this.authService.getToken();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
-    console.log(this.authService.getToken());
-    // Enviamos la solicitud con el token JWT en la cabecera
-    return this.http.post(`${this.apiUrl}/add`, producto, { headers });
+  getCart(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/cart`);
   }
 
-  eliminarProducto(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/remove/${id}`);
+  removeFromCart(itemId: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/cart/remove`, { item_id: itemId });
   }
 }

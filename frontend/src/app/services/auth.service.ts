@@ -6,27 +6,23 @@ import { catchError, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8000/api';
+  private apiUrl = 'http://127.0.0.1:8000/api';
 
   constructor(private http: HttpClient) {}
 
-  login(credentials: { email: string; password: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, credentials);
+  login(email: string, password: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/login`, { email, password });
   }
 
-  register(userData: {
-    name: string;
-    email: string;
-    password: string;
-    password_confirmation: string;
-  }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, userData);
-  }
-   setToken(token: string) {
-    localStorage.setItem('token', token);
+  register(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register`, data);
   }
 
-  getToken(): string | null {
-    return localStorage.getItem('token'); // Asumiendo que guardas el token en localStorage
+  logout(): Observable<any> {
+    return this.http.post(`${this.apiUrl}/logout`, {});
+  }
+
+  getUser(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/user`);
   }
 }

@@ -1,6 +1,8 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-footer',
@@ -10,12 +12,29 @@ import { IonicModule } from '@ionic/angular';
   imports: [
     IonicModule, 
     RouterModule,
+    CommonModule,
+    
     
   ]
 })
 export class FooterComponent {
+  constructor(private authService: AuthService, private router: Router) {}
 
-  constructor() { }
+  // Verifica si el usuario está autenticado
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('token');
+  }
 
-
+  // Método para cerrar sesión
+  logout() {
+    this.authService.logout().subscribe({
+      next: () => {
+        localStorage.removeItem('token'); // Elimina el token
+        this.router.navigate(['/home']);  // Redirige a la página de inicio
+      },
+      error: (err) => {
+        console.error('Error al cerrar sesión', err);
+      }
+    });
+  }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NegocioService } from '../../services/negocio.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Negocio } from '../categories-section/categories-section.component';
-import { IonicModule, ToastController  } from '@ionic/angular';
+import { IonicModule, ToastController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { CarritoService } from 'src/app/services/carrito.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -15,14 +15,13 @@ import { AuthInterceptorService } from 'src/app/services/auth-interceptor.servic
   standalone: true,
   imports: [IonicModule, CommonModule, RouterModule],
   providers: [
-    NegocioService, 
+    NegocioService,
     CarritoService,
     {
-      provide: HTTP_INTERCEPTORS,  // Aquí registras el interceptor
+      provide: HTTP_INTERCEPTORS, // Aquí registras el interceptor
       useClass: AuthInterceptorService,
-      multi: true
-    }
-
+      multi: true,
+    },
   ],
 })
 export class NegocioDetalleComponent implements OnInit {
@@ -35,9 +34,8 @@ export class NegocioDetalleComponent implements OnInit {
     private route: ActivatedRoute,
     private negocioService: NegocioService,
     private carritoService: CarritoService,
-    private router: RouterModule,  // Para redireccionar al carrito
-    private toastController: ToastController,
-
+    private router: RouterModule, // Para redireccionar al carrito
+    private toastController: ToastController
   ) {}
 
   ngOnInit() {
@@ -84,49 +82,46 @@ export class NegocioDetalleComponent implements OnInit {
     );
   }
 
-    // Incrementar la cantidad del producto seleccionado
-    incrementarCantidad(productoId: number) {
-      if (!this.cantidades[productoId]) {
-        this.cantidades[productoId] = 1;
-      } else {
-        this.cantidades[productoId]++;
-      }
+  // Incrementar la cantidad del producto seleccionado
+  incrementarCantidad(productoId: number) {
+    if (!this.cantidades[productoId]) {
+      this.cantidades[productoId] = 1;
+    } else {
+      this.cantidades[productoId]++;
     }
-  
-    // Decrementar la cantidad del producto seleccionado
-    decrementarCantidad(productoId: number) {
-      if (this.cantidades[productoId] > 0) {
-        this.cantidades[productoId]--;
-      }
-    }
+  }
 
-    agregarAlCarrito(productoId: number, precio: number) {
-      const cantidad = this.cantidades[productoId] || 1;  // Si no se ha seleccionado, por defecto es 1
-  
-      const producto = {
-        productoId,
-        cantidad,
-        precio,
-      };
-  
-      this.carritoService.agregarProducto(producto).subscribe(
-        async () => {
-          const toast = await this.toastController.create({
-            message: 'Producto agregado al carrito',
-            duration: 2000,
-            color: 'success'
-          });
-          toast.present();
-        },
-        async (error) => {
-          const toast = await this.toastController.create({
-            message: 'Error al agregar producto al carrito',
-            duration: 2000,
-            color: 'danger'
-          });
-          toast.present();
-          console.error('Error al agregar producto al carrito', error);
-        }
-      );
+  // Decrementar la cantidad del producto seleccionado
+  decrementarCantidad(productoId: number) {
+    if (this.cantidades[productoId] > 0) {
+      this.cantidades[productoId]--;
     }
+  }
+
+  agregarAlCarrito(productoId: number) {
+    const cantidad = this.cantidades[productoId] || 1; // Si no ha seleccionado cantidad, por defecto es 1
+    this.carritoService.addToCart(productoId, cantidad).subscribe({
+      next: async (res) => {
+        // Mostrar un mensaje de éxito usando Toast
+        const toast = await this.toastController.create({
+          message: 'Producto añadido al carrito exitosamente',
+          duration: 2000,
+          position: 'top',
+          color: 'success',
+        });
+        toast.present();
+      },
+      error: async (err) => {
+        console.error('Error al agregar el producto al carrito', err);
+        // Mostrar un mensaje de error usando Toast
+        const toast = await this.toastController.create({
+          message: 'Error al agregar el producto al carrito',
+          duration: 2000,
+          position: 'top',
+          color: 'danger',
+        });
+        toast.present();
+      },
+    });
+  }
 }

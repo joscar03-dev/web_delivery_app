@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { Component } from '@angular/core';
 import { NegocioDetalleComponent } from './components/negocio-detalle/negocio-detalle.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -14,17 +15,17 @@ export const routes: Routes = [
   },
   { path: 'negocio/:id', component: NegocioDetalleComponent },
   {
-    path: 'register',
-    loadComponent: () => import('./pages/register/register.page').then( m => m.RegisterPage)
-  },
-  {
     path: 'login',
-    loadComponent: () => import('./pages/login/login.page').then( m => m.LoginPage)
+    loadComponent: () => import('./components/login/login.component').then(m => m.LoginComponent)
   },
   {
-    path: 'carrito',
-    loadComponent: () => import('./pages/carrito/carrito.page').then( m => m.CarritoPage)
-  }
-
+    path: 'register',
+    loadComponent: () => import('./components/register/register.component').then(m => m.RegisterComponent)
+  },
+  {
+    path: 'cart',
+    loadComponent: () => import('./components/carrito/carrito.component').then(m => m.CarritoComponent),
+    canActivate: [authGuard] // Proteger la ruta con el guard
+  },
 
 ];
