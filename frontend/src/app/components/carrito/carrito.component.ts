@@ -9,11 +9,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './carrito.component.html',
   styleUrls: ['./carrito.component.scss'],
   standalone: true, // Componente independiente
-  imports: [
-    RouterModule,
-    CommonModule,
-    IonicModule
-  ], // Importar el módulo de rutas
+  imports: [RouterModule, CommonModule, IonicModule], // Importar el módulo de rutas
 })
 export class CarritoComponent implements OnInit {
   cartItems: any[] = [];
@@ -53,9 +49,9 @@ export class CarritoComponent implements OnInit {
 
   // Obtener el monto total a pagar
   getTotalAmount(): number {
-    return this.cartItems.reduce((total, item) => {
-      return total + (item.total || 0); // Asegurarse de que item.total no sea undefined o null
+    return this.cartItems.reduce((sum, item) => {
+      const totalPorProducto = item.cantidad * item.precio_unitario;
+      return sum + totalPorProducto;
     }, 0);
   }
-  
 }
