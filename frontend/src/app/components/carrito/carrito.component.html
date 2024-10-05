@@ -1,3 +1,43 @@
-<p>
-  carrito works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Carrito</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Si no hay productos en el carrito -->
+  <div *ngIf="cartItems.length === 0" class="empty-cart">
+    <h2>Tu carrito está vacío</h2>
+    <p>Agrega algunos productos para continuar con la compra.</p>
+  </div>
+
+  <!-- Lista de productos en el carrito -->
+  <ion-list *ngIf="cartItems.length > 0">
+    <ion-item *ngFor="let item of cartItems">
+      <ion-label>
+        <h2>{{ item.producto.nombre }}</h2>
+        <p>Precio unitario: {{ item.precio_unitario | currency }}</p>
+        <p>Cantidad: {{ item.cantidad }}</p>
+        <p>Total: {{ item.total | currency }}</p>
+      </ion-label>
+
+      <!-- Botón para eliminar producto del carrito -->
+      <ion-button color="danger" (click)="removeFromCart(item.id)">
+        <ion-icon name="trash-outline"></ion-icon>
+        Eliminar
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <!-- Resumen del carrito -->
+  <div *ngIf="cartItems.length > 0" class="cart-summary">
+    <h3>Resumen</h3>
+    <p>Total de productos: {{ getTotalQuantity() }}</p>
+    <p>Total a pagar: {{ getTotalAmount() | currency }}</p>
+
+    <!-- Botón para proceder al pago -->
+    <ion-button expand="block" color="success">
+      Proceder al pago
+    </ion-button>
+  </div>
+</ion-content>
