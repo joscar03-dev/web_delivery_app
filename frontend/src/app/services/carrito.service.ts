@@ -11,10 +11,10 @@ export class CarritoService {
 
   constructor(private http: HttpClient) {}
 
-  addToCart(productId: number, quantity: number): Observable<any> {
+  addToCart(productoId: number, cantidad: number): Observable<any> {
     return this.http.post(`${this.apiUrl}/cart/add`, {
-      product_id: productId,
-      quantity,
+      producto_id: productoId,
+      cantidad,
     });
   }
 
