@@ -21,29 +21,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::get('/platos', [ProductoController::class, 'index']);
 
-// NUEVOS
-Route::middleware(['auth:api'])->group(function () {
-    Route::get('/user', function (Request $request) {
-        return $request->user();
-    });
-    // API del carrito
-    Route::get('carrito', [CarritoController::class, 'getCarrito']);
-    Route::post('carrito/add', [CarritoController::class, 'addProducto']);
-    Route::delete('carrito/remove/{id}', [CarritoController::class, 'removeProducto']);
-});
-
-Route::group(['middleware' => ['jwt.auth']], function() {
-    Route::post('/carrito/add', [CarritoController::class, 'agregarProducto']);
-    Route::get('carrito', [CarritoController::class, 'getCarrito']);
-});
-
-Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
 
 
 //lo que removi de auth:sanctum
@@ -64,9 +44,19 @@ Route::post('pedidos/checkout', [PedidoController::class, 'checkout']);
 Route::get('pedidos', [PedidoController::class, 'getPedidos']);
 Route::get('pedidos/{id}', [PedidoController::class, 'getPedidoById']);
 
-// API AUTH
-Route::post('register', [AuthController::class, 'register']);
-Route::post('login', [AuthController::class, 'login']);
+
 
 //API TIPO DE NEGOCIOS
 Route::get('/tipos-negocios', [TipoNegocioController::class, 'index']);
+
+
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
+Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
+Route::middleware('auth:sanctum')->get('user', [AuthController::class, 'user']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('cart/add', [CarritoController::class, 'add']);
+    Route::get('cart', [CarritoController::class, 'view']);
+    Route::post('cart/remove', [CarritoController::class, 'remove']);
+});
