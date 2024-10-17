@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\CarritoItemResource\RelationManagers\ItemsRelationManager;
 use App\Filament\Resources\CarritoResource\Pages;
 use App\Filament\Resources\CarritoResource\RelationManagers;
 use App\Models\Carrito;
@@ -35,9 +36,21 @@ class CarritoResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('users.name')->label('Usuario')->sortable(),
+                TextColumn::make('user.name')->label('Usuario')->sortable(),
                 TextColumn::make('created_at')->label('Fecha de creación')->dateTime(),
+            ])
+            ->filters([
+                Tables\Filters\Filter::make('Solo clientes')
+                    ->query(fn(Builder $query) => $query->whereHas('user.roles', function (Builder $query) {
+                        $query->where('name', 'cliente');
+                    })),
             ]);
+    }
+    public static function getRelations(): array
+    {
+        return [
+            ItemsRelationManager::class,
+        ];
     }
 
     public static function getPages(): array

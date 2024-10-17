@@ -1,4 +1,4 @@
-<ion-footer>
+<ion-footer *ngIf="shouldDisplayFooter()">
   <ion-toolbar>
     <ion-buttons slot="start">
       <!-- Botón de Home -->
@@ -27,7 +27,7 @@
           <ion-icon name="log-out-outline"></ion-icon>
           Logout
         </ion-button>
-        <ion-button routerLink="/cart">
+        <ion-button routerLink="/carrito">
           <ion-icon name="cart-outline"></ion-icon>
         </ion-button>
       </ng-container>

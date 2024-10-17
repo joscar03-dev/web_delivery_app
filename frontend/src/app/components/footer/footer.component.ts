@@ -37,4 +37,9 @@ export class FooterComponent {
       }
     });
   }
+
+  shouldDisplayFooter(): boolean {
+    const hiddenRoutes = ['/login', '/register'];
+    return !hiddenRoutes.includes(this.router.url);
+  }
 }

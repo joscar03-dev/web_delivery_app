@@ -39,4 +39,8 @@ export class NegocioService {
     const url = `http://localhost:8000/api/categorias/${categoriaId}/productos`;
     return this.http.get<any[]>(url);
   }
+  getNegociosByPage(tipoNegocioId: number, page: number, pageSize: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}?tipo_negocio_id=${tipoNegocioId}&page=${page}&pageSize=${pageSize}`);
+  }
+  
 }

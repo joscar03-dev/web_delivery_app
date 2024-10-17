@@ -23,7 +23,7 @@ export const routes: Routes = [
     loadComponent: () => import('./components/register/register.component').then(m => m.RegisterComponent)
   },
   {
-    path: 'cart',
+    path: 'carrito',
     loadComponent: () => import('./components/carrito/carrito.component').then(m => m.CarritoComponent),
     canActivate: [authGuard] // Proteger la ruta con el guard
   },

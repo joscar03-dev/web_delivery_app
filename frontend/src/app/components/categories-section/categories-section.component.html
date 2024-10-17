@@ -75,5 +75,10 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+
+    <ion-infinite-scroll (ionInfinite)="loadMoreNegocios($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más negocios...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
 

@@ -16,9 +16,9 @@ export interface Negocio {
   hora_cierre: string;
   estado: string; // 'Abierto' o 'Cerrado'
   // Otras propiedades que devuelva tu API
-  platos?: Plato[];
+  platos?: Productos[];
 }
-export interface Plato {
+export interface Productos {
   id: number;
   nombre: string;
   descripcion: string;
@@ -32,12 +32,7 @@ export interface Plato {
   styleUrls: ['./categories-section.component.scss'],
   standalone: true,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [
-    IonicModule,
-    RouterModule,
-    CommonModule, 
-    RouterModule
-  ]
+  imports: [IonicModule, RouterModule, CommonModule, RouterModule],
 })
 /* export class CategoriesSectionComponent implements OnInit {
   tiposNegocios: any[] = [];
@@ -73,69 +68,94 @@ export interface Plato {
     }
   }
 } */
-  export class CategoriesSectionComponent implements OnInit {
-    tiposNegocios: any[] = [];
-    negocios: any[] = [];
-  
-    constructor(
-      private tiposNegociosService: TiposNegociosService,
-      private negociosService: NegocioService
-    ) {}
-  
-    ngOnInit() {
-      this.loadTiposNegocios(); // Carga las categorías al inicio
-      this.loadNegociosAbiertos();
-    }
-  
-    loadTiposNegocios() {
-      this.tiposNegociosService.getTiposNegocios().subscribe(
-        (data) => {
-          this.tiposNegocios = data;
-        },
-        (error) => {
-          console.error('Error al cargar los tipos de negocios:', error);
-        }
-      );
-    }
-    getIcon(nombre: string): string {
-      switch (nombre.toLowerCase()) {
-        case 'comida':
-          return 'restaurant';
-        case 'licor':
-          return 'wine';
-        case 'tiendas':
-          return 'cart';
-        case 'servicios':
-          return 'construct';
-        default:
-          return 'help-circle';
+export class CategoriesSectionComponent implements OnInit {
+  tiposNegocios: any[] = [];
+  negocios: any[] = [];
+  page = 1;
+  pageSize = 10;
+  loading = false;
+  selectedCategoryId: number | null = null;
+
+  constructor(
+    private tiposNegociosService: TiposNegociosService,
+    private negociosService: NegocioService
+  ) {}
+
+  ngOnInit() {
+    this.loadTiposNegocios(); // Carga las categorías al inicio
+    this.loadNegociosAbiertos();
+  }
+
+  loadTiposNegocios() {
+    this.tiposNegociosService.getTiposNegocios().subscribe(
+      (data) => {
+        this.tiposNegocios = data;
+      },
+      (error) => {
+        console.error('Error al cargar los tipos de negocios:', error);
       }
+    );
+  }
+  getIcon(nombre: string): string {
+    switch (nombre.toLowerCase()) {
+      case 'comida':
+        return 'restaurant';
+      case 'licor':
+        return 'wine';
+      case 'tiendas':
+        return 'cart';
+      case 'servicios':
+        return 'construct';
+      default:
+        return 'help-circle';
     }
-  
-    // Este método se ejecuta cuando se selecciona una categoría
-    onCategoriaClick(tipoNegocioId: number) {
-      this.negociosService.getNegocios(tipoNegocioId).subscribe(
+  }
+
+  // Este método se ejecuta cuando se selecciona una categoría
+  onCategoriaClick(tipoNegocioId: number) {
+    this.negociosService.getNegocios(tipoNegocioId).subscribe(
+      (data) => {
+        this.negocios = data; // Asignar los negocios filtrados a la variable negocios
+        console.log('Negocios filtrados:', data);
+      },
+      (error) => {
+        console.error('Error al cargar los negocios:', error);
+      }
+    );
+  }
+
+  // Método para cargar más negocios con Infinite Scroll
+  loadMoreNegocios(event: any) {
+    this.page++; // Incrementar la página
+    this.loadNegocios(); // Cargar más negocios
+    event.target.complete(); // Detener el spinner del infinite scroll
+  }
+  loadNegocios() {
+    this.loading = true; // Prevenir múltiples cargas simultáneas
+    this.negociosService
+      .getNegociosByPage(this.selectedCategoryId ?? 0, this.page, this.pageSize)
+      .subscribe(
         (data) => {
-          this.negocios = data; // Asignar los negocios filtrados a la variable negocios
-          console.log('Negocios filtrados:', data);
+          this.negocios = [...this.negocios, ...data]; // Añadir más negocios
+          this.loading = false;
         },
         (error) => {
           console.error('Error al cargar los negocios:', error);
+          this.loading = false;
         }
       );
-    }
-
-    loadNegociosAbiertos() {
-      this.negociosService.getNegocios().subscribe(
-        (data) => {
-          
-          // Filtrar solo los negocios abiertos
-          this.negocios = data.filter(negocios => negocios.estado === 'Abierto');
-          
-        },
-        (error) => {
-          console.error('Error al cargar los negocios abiertos:', error);
-        }
-      );
-    }
   }
+  loadNegociosAbiertos() {
+    this.negociosService.getNegocios().subscribe(
+      (data) => {
+        // Filtrar solo los negocios abiertos
+        this.negocios = data.filter(
+          (negocios) => negocios.estado === 'Abierto'
+        );
+      },
+      (error) => {
+        console.error('Error al cargar los negocios abiertos:', error);
+      }
+    );
+  }
+}
