@@ -7,7 +7,7 @@ import { Negocio } from '../components/categories-section/categories-section.com
   providedIn: 'root'
 })
 export class NegocioService {
-  private apiUrl = 'https://apidelivery.up.railway.app/api/negocios';  // URL de la API Laravel
+  private apiUrl = 'http://127.0.0.1:8000/api/negocios';  // URL de la API Laravel
 
   constructor(private http: HttpClient) {}
 
