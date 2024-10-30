@@ -1,15 +1,12 @@
 <ion-footer *ngIf="shouldDisplayFooter()">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <!-- Botón de Home -->
       <ion-button routerLink="/home">
         <ion-icon name="home-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
 
-    <!-- Botones de Autenticación -->
     <ion-buttons slot="end">
-      <!-- Si no está autenticado, muestra Login y Register -->
       <ng-container *ngIf="!isAuthenticated()">
         <ion-button routerLink="/login">
           <ion-icon name="log-in-outline"></ion-icon>
@@ -21,12 +18,22 @@
         </ion-button>
       </ng-container>
 
-      <!-- Si está autenticado, muestra Logout y Carrito -->
       <ng-container *ngIf="isAuthenticated()">
-        <ion-button (click)="logout()">
+        <!-- <ion-button (click)="logout()">
+          <ion-icon name="log-out-outline"></ion-icon>
+          Logout
+        </ion-button> -->
+
+        <ion-button id="present-alert">
           <ion-icon name="log-out-outline"></ion-icon>
           Logout
         </ion-button>
+        <ion-alert
+          trigger="present-alert"
+          class="custom-alert"
+          header="¿Estás seguro de cerrar sesión?"
+          [buttons]="alertButtons"
+        ></ion-alert>
         <ion-button routerLink="/carrito">
           <ion-icon name="cart-outline"></ion-icon>
         </ion-button>
