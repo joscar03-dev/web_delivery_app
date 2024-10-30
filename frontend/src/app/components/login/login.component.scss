@@ -1,0 +1,81 @@
+.custom-content {
+    --background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .signup-container {
+    width: 100%;
+    max-width: 300px;
+    padding: 20px;
+    position: relative;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #2c3e50;
+  
+    span {
+      color: #95a5a6;
+    }
+  }
+  
+  .custom-item {
+    --background: transparent;
+    --border-color: #bdc3c7;
+    --border-style: solid;
+    --border-width: 0 0 1px 0;
+    --inner-padding-end: 0;
+    --padding-start: 0;
+    
+    ion-input {
+      --color: #333;
+      --placeholder-color: #95a5a6;
+      --placeholder-opacity: 1;
+    }
+  }
+  
+  .signup-button {
+    --background: #1abc9c;
+    --background-activated: #16a085;
+    --color: #ffffff;
+    --border-radius: 20px;
+    margin-top: 20px;
+  }
+  
+  .cityscape {
+    height: 100px;
+    background-image: url('/assets/cityscape.png'); // Asegúrate de tener esta imagen
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    margin-top: 20px;
+  }
+  
+  /* Ajustes responsivos */
+  @media (max-width: 768px) {
+    .signup-container {
+      padding: 10px;
+    }
+  
+    .title {
+      font-size: 20px;
+    }
+  
+    .cityscape {
+      height: 80px;
+    }
+  }
