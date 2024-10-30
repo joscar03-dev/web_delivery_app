@@ -28,7 +28,7 @@ addIcons(
     'person-add-outline': personAddOutline,
     'trash-outline': trashOutline,
     'log-out-outline': logOutOutline,
-    
+
   }
 );
 bootstrapApplication(AppComponent, {
@@ -37,6 +37,6 @@ bootstrapApplication(AppComponent, {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
     provideRouter(routes, withPreloading(PreloadAllModules)),
-  
+
   ],
 });
