@@ -96,6 +96,7 @@ export class CategoriesSectionComponent implements OnInit {
       }
     );
   }
+
   getIcon(nombre: string): string {
     switch (nombre.toLowerCase()) {
       case 'comida':
@@ -124,12 +125,28 @@ export class CategoriesSectionComponent implements OnInit {
     );
   }
 
+
   // Método para cargar más negocios con Infinite Scroll
   loadMoreNegocios(event: any) {
-    this.page++; // Incrementar la página
-    this.loadNegocios(); // Cargar más negocios
-    event.target.complete(); // Detener el spinner del infinite scroll
+    this.page++;  // Increment the page number for pagination
+
+    this.negociosService.getNegociosByPage(this.selectedCategoryId ?? 0, this.page, this.pageSize)
+      .subscribe(
+        (data) => {
+          if (data.length > 0) {
+            this.negocios = [...this.negocios, ...data]; // Append new data
+          } else {
+            event.target.disabled = true; // Disable infinite scroll if no more data
+          }
+          event.target.complete(); // Complete the scroll event
+        },
+        (error) => {
+          console.error('Error al cargar más negocios', error);
+          event.target.complete(); // Even in error, signal the completion of the scroll
+        }
+      );
   }
+
   loadNegocios() {
     this.loading = true; // Prevenir múltiples cargas simultáneas
     this.negociosService
@@ -145,6 +162,7 @@ export class CategoriesSectionComponent implements OnInit {
         }
       );
   }
+
   loadNegociosAbiertos() {
     this.negociosService.getNegocios().subscribe(
       (data) => {
@@ -158,4 +176,5 @@ export class CategoriesSectionComponent implements OnInit {
       }
     );
   }
+
 }

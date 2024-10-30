@@ -1,19 +1,19 @@
-<!-- 
+<!--
   <ion-grid>
     <ion-row>
       <ion-col *ngFor="let tipo of tiposNegocios" size="3">
         <ion-button expand="block" [routerLink]="['#']" class="category-button" (click)="onCategoriaClick(tipo.id)">
           <div class="category-content">
             <ion-icon [name]="" slot="start"></ion-icon>
-            
+
             <div>{{ tipo.nombre }}</div>
           </div>
-          
+
         </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
-  
+
   <div class="negocios" *ngIf="negocios.length > 0">
     <ion-grid>
       <ion-row>
@@ -35,50 +35,67 @@
 
 
  -->
+<ion-grid>
+  <ion-row>
+    <ion-col *ngFor="let tipo of tiposNegocios" size="3">
+      <ion-button
+        expand="block"
+        class="category-button"
+        (click)="onCategoriaClick(tipo.id)"
+      >
+        <div class="category-content">
+          <ion-icon [name]="getIcon(tipo.nombre)" slot="start"></ion-icon>
+          <div>{{ tipo.nombre }}</div>
+        </div>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<div class="negocios" *ngIf="negocios.length > 0">
   <ion-grid>
     <ion-row>
-      <ion-col *ngFor="let tipo of tiposNegocios" size="3">
-        <ion-button expand="block" class="category-button" (click)="onCategoriaClick(tipo.id)">
-          <div class="category-content">
-            <ion-icon [name]="getIcon(tipo.nombre)" slot="start"></ion-icon>
-            <div>{{ tipo.nombre }}</div>
-          </div>
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-  <div class="negocios" *ngIf="negocios.length > 0">
-    <ion-grid>
-      <ion-row>
-        <ion-col *ngFor="let negocio of negocios" size="12" size-md="4">
-          <ion-card [routerLink]="['/negocio', negocio.id]">
-            <ion-img class="negocio-imagen" [src]="negocio.imagen ? negocio.imagen : 'assets/img/defecto.jpg'"></ion-img>
-            <ion-card-header>
-              <ion-card-title>{{ negocio.nombre }}</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <p>{{ negocio.telefono }}</p>
-              <p>{{ negocio.email }}</p>
-              <!-- Mostrar el estado de abierto/cerrado -->
-            <div *ngIf="negocio.estado === 'Abierto'" class="badge badge-success">
+      <ion-col *ngFor="let negocio of negocios" size="12" size-md="4">
+        <ion-card [routerLink]="['/negocio', negocio.id]">
+          <ion-img
+            class="negocio-imagen"
+            [src]="negocio.imagen ? negocio.imagen : 'assets/img/defecto.jpg'"
+          ></ion-img>
+          <ion-card-header>
+            <ion-card-title>{{ negocio.nombre }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{ negocio.telefono }}</p>
+            <p>{{ negocio.email }}</p>
+            <!-- Mostrar el estado de abierto/cerrado -->
+            <div
+              *ngIf="negocio.estado === 'Abierto'"
+              class="badge badge-success"
+            >
               Abierto
             </div>
-            <div *ngIf="negocio.estado === 'Cerrado'" class="badge badge-danger">
+            <div
+              *ngIf="negocio.estado === 'Cerrado'"
+              class="badge badge-danger"
+            >
               Cerrado
             </div>
             <p>
               Horario: {{ negocio.hora_apertura }} - {{ negocio.hora_cierre }}
             </p>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-    <ion-infinite-scroll (ionInfinite)="loadMoreNegocios($event)">
-      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más negocios...">
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-  </div>
-
+  <ion-infinite-scroll
+    threshold="100px"
+    (ionInfinite)="loadMoreNegocios($event)"
+  >
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Cargando más negocios..."
+    ></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</div>
