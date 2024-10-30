@@ -1,6 +1,22 @@
 <ion-spinner *ngIf="featuredItems.length === 0"></ion-spinner>
-<swiper-container [pagination]="true" [slidesPerView]="1" [loop]="true">
-  <swiper-slide *ngFor="let item of featuredItems" >
+<swiper-container
+  [pagination]="true"
+  [slidesPerView]="1"
+  [loop]="false"
+  [spaceBetween]="10"
+  [breakpoints]="{
+    '320': { 'slidesPerView': 1, 'spaceBetween': 10 },
+    '480': { 'slidesPerView': 1, 'spaceBetween': 10 },
+    '640': { 'slidesPerView': 1, 'spaceBetween': 10 },
+    '768': { 'slidesPerView': 2, 'spaceBetween': 10 },
+    '1024': { 'slidesPerView': 3, 'spaceBetween': 10 },
+    '1280': { 'slidesPerView': 4, 'spaceBetween': 10 },
+    '1440': { 'slidesPerView': 5, 'spaceBetween': 10 },
+    '1600': { 'slidesPerView': 6, 'spaceBetween': 10 },
+    '1920': { 'slidesPerView': 6, 'spaceBetween': 10 }
+  }"
+>
+  <swiper-slide *ngFor="let item of featuredItems">
     <ion-card [routerLink]="['/negocio', item.id]">
       <ion-img
         [src]="item.imagen ? item.imagen : 'assets/img/defecto.jpg'"
@@ -17,9 +33,7 @@
           Cerrado
         </div>
         <!-- Mostrar el horario de apertura y cierre -->
-        <p>
-          Horario: {{ item.hora_apertura }} - {{ item.hora_cierre }}
-        </p>
+        <p>Horario: {{ item.hora_apertura }} - {{ item.hora_cierre }}</p>
       </ion-card-content>
     </ion-card>
   </swiper-slide>
