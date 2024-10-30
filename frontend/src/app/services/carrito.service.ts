@@ -7,7 +7,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class CarritoService {
-  private apiUrl = 'https://apidelivery.up.railway.app/api';
+  private apiUrl = 'https://deliveryapi.online/api';
 
   constructor(private http: HttpClient) {}
 
@@ -25,4 +25,8 @@ export class CarritoService {
   removeFromCart(itemId: number): Observable<any> {
     return this.http.post(`${this.apiUrl}/cart/remove`, { item_id: itemId });
   }
+
 }
+
+
+

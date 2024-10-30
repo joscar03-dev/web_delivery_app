@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class TiposNegociosService {
 
-  private apiUrl = 'https://apidelivery.up.railway.app/api/tipos-negocios';
+  private apiUrl = 'https://deliveryapi.online/api/tipos-negocios';
 
   constructor(private http: HttpClient) {}
 

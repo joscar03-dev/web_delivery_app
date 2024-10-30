@@ -6,7 +6,7 @@ import { catchError, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'https://apidelivery.up.railway.app/api';
+  private apiUrl = 'https://deliveryapi.online/api';
 
   constructor(private http: HttpClient) {}
 

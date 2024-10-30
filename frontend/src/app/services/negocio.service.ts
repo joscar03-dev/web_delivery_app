@@ -7,19 +7,19 @@ import { Negocio } from '../components/categories-section/categories-section.com
   providedIn: 'root'
 })
 export class NegocioService {
-  private apiUrl = 'https://apidelivery.up.railway.app/api/negocios';  // URL de la API Laravel
+  private apiUrl = 'https://deliveryapi.online/api/negocios';  // URL de la API Laravel
 
   constructor(private http: HttpClient) {}
 
   // Obtener todos los negocios (con opción de filtrar por tipo)
   getNegocios(tipoNegocioId?: number): Observable<Negocio[]> {
     let url = this.apiUrl;
-    
+
     // Si se proporciona el parámetro tipoNegocioId, añadirlo a la URL como query string
     if (tipoNegocioId) {
       url += `?tipo_negocio_id=${tipoNegocioId}`;
     }
-    
+
     return this.http.get<Negocio[]>(url)
   }
 
@@ -36,11 +36,11 @@ export class NegocioService {
 
   // Obtener los productos de una categoría por su ID
   getProductosByCategoria(categoriaId: number): Observable<any[]> {
-    const url = `http://localhost:8000/api/categorias/${categoriaId}/productos`;
+    const url = `https://deliveryapi.online/api/categorias/${categoriaId}/productos`;
     return this.http.get<any[]>(url);
   }
   getNegociosByPage(tipoNegocioId: number, page: number, pageSize: number): Observable<any> {
     return this.http.get(`${this.apiUrl}?tipo_negocio_id=${tipoNegocioId}&page=${page}&pageSize=${pageSize}`);
   }
-  
+
 }
